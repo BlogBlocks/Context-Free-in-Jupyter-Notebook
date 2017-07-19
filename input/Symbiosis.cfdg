@@ -1,0 +1,73 @@
+startshape Symbiosis      // ISIS  1600*900  
+
+CF::Background = [h 40 sat 1 b -0.85] 
+CF::Size = [s 16 9]
+CF::ColorDepth = 16
+CF::Impure=1 
+CF::MinimumSize=1
+
+vector3 Add(vector3 V1,vector3 V2)=
+(V1[0]+V2[0], V1[1]+V2[1], V1[2]+V2[2])
+
+vector3 Norm(vector3 V)=let
+(L=sqrt(V[0]^2+V[1]^2+V[2]^2);(V[0]/L, V[1]/L, V[2]/L))
+
+vector3 Proj(vector3 V)=let
+(S=(2-V[2]/9);(V[0]/S, V[1]/S, V[2]/S))
+
+// Rotate V about R by alfa degrees
+//---------------------------------
+vector3 RotVRa(vector3 V, vector3 R, alfa)=let
+(W=cos(alfa/2);Sin=sin(alfa/2); X=Sin*R[0]; Y=Sin*R[1]; Z=Sin*R[2]
+;((1-2*(Y*Y+Z*Z))*V[0]+   2*(Y*X-Z*W) *V[1]+   2*(Z*X+Y*W) *V[2]
+ ,   2*(X*Y+Z*W) *V[0]+(1-2*(Z*Z+X*X))*V[1]+   2*(Z*Y-X*W) *V[2]
+ ,   2*(X*Z-Y*W) *V[0]+   2*(Y*Z+X*W) *V[1]+(1-2*(X*X+Y*Y))*V[2]
+))
+//================================================================
+// Symbiosis between efies spikedblack and ten infected worms
+//================================================================
+shape Symbiosis
+{ Efi_1139 [x 3.5 s 0.3 0.18 r 180 h 50 z 0.2]
+  loop i=20,10,-1 [s 0.9 x 0.7 z -0.1 h -5]
+    Worm((0,0,-1),(1,0,0),(i*400))
+      [x -1 s 15 8 h 40 sat 0.25 b 0.8]
+}
+//----------------------------------------------------------------
+// Worm infected with Spikes
+//----------------------------------------------------------------
+shape Worm (vector3 V,vector3 R,number i)
+{ Rr=(-0.2..0.2,-0.3..0.3,-0.1..0.1)
+  Rn=Norm(Add(R,Rr))
+  Vn=RotVRa(V,Rn,0.5)
+  Plot (Proj(Vn),i) []
+  if (i>0) Worm(Vn,Rn,i-1) [s .99996]
+}
+shape Plot(vector3 V,number i)
+{ S=(3+sin(i))/300
+  transform[s S x V[0] y V[1] z V[2]]
+  { B=(0.6+V[2]/4)
+    if (mod(i,7)==0) Efi_B [s 0.35 r i h 20 b B]
+    CIRCLE [      b B ]
+    CIRCLE [s 1.5 b -1  sat 1  a -0.9000 z -0.001]
+    CIRCLE [s 30  b 0.1 sat 1  a -0.9997 z +0.001]
+} }
+//----------------------------------------------------------------
+// efi - design 1139 spikedBlack
+//----------------------------------------------------------------
+shape Efi_1139
+{ Efi_B [s 3 b 1]
+  loop 20 [r 18] Efi_B [x 3 b 1]
+}
+shape Efi_B
+rule { loop 75 [x 0.5 s 1 0.9 r  4] Efi_C [a -0.5 z  0.1] }
+rule { loop 75 [x 0.5 s 1 0.9 r -4] Efi_C [a -0.5 z -0.1] }
+ 
+shape Efi_C
+rule     { Cell [] }
+rule .05 { Efi_B [r  90] }
+rule .05 { Efi_B [r -90] }
+
+shape Cell
+{ loop 20 [s 0.95] CIRCLE  [ a -0.8 sat 0.2]
+  loop 20 [s 0.95] TRIANGLE[ a  0.05 x 1 h -40 sat 1 b -0.4]
+}

@@ -1,0 +1,92 @@
+include starrysky.cfdg
+
+startshape START
+background {b -1}
+size {s 2100 2100 x 0 y 0}
+
+rule START
+{
+	S{ s 23}
+	NEBULA{ s 2.5 x 20}
+}
+
+rule NEBULA 
+{
+ 3*{  s 1.15  b -.1 a -0.2} 
+	SPIRAL { skew -10 -10 a -0.5 h -30 b 0.1 }
+ 3*{ s 1.1 b -.1 a -0.3} 
+	SPIRAL { skew 5 5 a -0.5 z 1 }
+
+	CSTAR{ x -50 }
+}
+
+rule CSTAR
+{
+	STAR { h 345 sat 0.7 b 1  a 0.5 z 1 s 4}
+	150*{ alpha -0.02 s 1.2 }
+		 CIRCLE{ h 353 b 0.5 sat 1 s 0.0000000005 }
+}
+ rule GRAD
+{
+	7*{ s 0.7 } TRIANGLE { s 2 b 1 a -0.8 }
+}
+
+ rule GRAD
+{
+	7*{ s 0.7 } SQUARE { s 2 b 1 a -0.8 }
+}
+
+ rule GRAD
+{
+	7*{ s 0.7 } CIRCLE { s 2 b 1 a -0.8 }
+}
+rule SQ
+{
+	GRAD{ s 1 h 210 sat 1 b 1 y 0.3 }
+}
+rule SQ
+{
+	GRAD{ s 1 h 180 sat 1 b 1 y -0.3 }
+}
+
+rule SQ
+{
+	GRAD{ s 1  h 250 sat 0.3 b 0.01 y 0.2 }
+} 
+rule LINE
+{
+	80*{ a -0.001 s 0.95 x -1 }SQ {  a -0.4}
+	2*{ a -0.001 s 0.95 x 1 b -0.4}SQ {  a -0.2}
+	
+}
+rule LINE
+{
+	30*{ a -0.001 s 0.95 x -1 b -0.5 }SQ {  a -0.4}
+	30*{ a -0.001 s 0.95 x 1 }SQ {  a -0.2}
+}
+rule LINE
+{
+	60*{ a -0.001 s 0.95 x -1 b -0.5 }SQ {  a -0.4}
+	10*{ a -0.001 s 0.95 x 1 b -0.9}SQ {  a -0.2}
+}
+
+rule LINE
+{
+	10*{ a -0.001 s 0.95 x -1 b -0.5 }SQ {  a -0.4}
+	5*{ a -0.001 s 0.95 x 1 b -0.5}SQ {  a -0.2}
+}
+rule SPIRAL {
+    LINE { a -0.1 r -10 }
+    SPIRAL { y 1 x 0.7 s 1.0015 r 1  a -0.0001}
+}
+ 
+rule SPIRAL {
+    LINE { a -0.1 r -10 b -0.3}
+    SPIRAL {y -5 x -0.9 r -5  a -0.0001}
+}
+
+rule SPIRAL 0.0033 {}
+
+ 
+
+ 

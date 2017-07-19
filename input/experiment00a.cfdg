@@ -1,0 +1,48 @@
+startshape forest
+ 
+// forest
+ 
+rule forest 4.5 { forest { s 0.8 } }
+rule forest { forest { s 1.25 } }
+rule forest 0.5 {
+    forest { x 1 y 0.03 }
+    forest { x -1 } }
+rule forest 0.5 {
+    forest { x 1 y -0.03 }
+    forest { x -1 } }
+rule forest 0.03 {
+    forest { x 1 }
+    forest { x -1 }
+    seed { } }
+ 
+// trees
+ 
+rule seed { tree { y 0.5 r 85 } }
+rule seed { tree { y 0.5 flip 180 r 95 } }
+ 
+rule tree {
+    trunc { }
+    tree { x 1 r 1 s 0.95 b 0.01 } }
+rule tree 0.3 {
+    tree { flip 180 }
+    tree { r -20 y -0.1 s 0.7 b -0.5} }
+ 
+// trunc
+ 
+rule trunc 2 {
+    SQUARE { s 1.1 0.2 }
+    SQUARE { s 1.1 0.1 b 1 } }
+rule trunc {
+    SQUARE { s 1 0.2 }
+    SQUARE { x -0.25 s 0.5 0.1 b 0.8 }
+    SQUARE { x 0.25 s 0.5 0.1 b 0.9 } }
+rule trunc {
+    SQUARE { s 1 0.2 }
+    SQUARE { x -0.25 s 0.5 0.1 b 0.9 }
+    SQUARE { x 0.25 s 0.5 0.1 b 0.8 } }
+ 
+// mistletoe
+ 
+rule tree 0.05 {
+    CIRCLE { }
+    tree { } }

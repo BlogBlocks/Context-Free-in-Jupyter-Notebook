@@ -1,0 +1,118 @@
+/*
+	expression
+
+	by AK, June 2010
+
+	Using a context free grammar to create
+	a language of mathematical expressions.
+
+	Requires:
+	kipling's digit-font.cfdg (cfa gallery ID 2338)
+
+	variations:
+	any
+
+	http://creativecommons.org/licenses/by-sa/2.5/au/
+
+*/
+
+
+
+//include alfreeLC.cfdg
+include digit-font.cfdg
+
+// background{b -1}
+startshape START
+
+size{s 70}
+
+rule START{
+	expression{z 1}
+//	expression{r 180 b .9}
+	BALL{b 1 |b 0.1 s 100 z -99 sat .2 h rand_static(0,360)}
+	}
+
+rule BALL{
+	CIRCLE{ }
+	BALL[z 1 s .99 .99 .99 z -1 b .008| ]
+	}
+
+
+//background{h 60 sat .3 b -.3}
+
+rule expression{start_term{}}
+rule end_expression{expression{ r -5 s (.9999^5)}}
+//rule end_expression{end_expression{ r -4 s (.9999^4)}}
+
+rule start_term{start_factor{}}
+rule end_term 5{addop_{r -1.5} start_term{ r -3 s (.9999^3)}}
+rule end_term{end_expression{}}
+
+rule start_factor{nzdigit_{} cont_factor{}}
+rule cont_factor{digit_{r -1} cont_factor{ r -1 s .9999}}
+rule cont_factor 2{end_factor{}}
+rule cont_factor {supdigit_{r -1} end_factor{ r -1 s .9999}}
+rule end_factor{multop_{r -1} start_factor{ r -2 s (.9999^2)}}
+rule end_factor 2{end_term{}}
+
+// --- rules for inside one set of parentheses ---
+rule start_factor .5 {lparen_{}	start_inner_term{r -1 s .9999}}
+
+rule start_inner_term{start_inner_factor{}}
+rule end_inner_term 3{addop_{r -1.5} start_inner_term{r -3 s (.9999^3)}}
+rule end_inner_term{rparen_{r -1} end_factor{r -1 s .9999}}
+rule end_inner_term{rparen_{r -1} supdigit_{r -2} end_factor{r -2 s (.9999^2)}}
+
+rule start_inner_factor{nzdigit_{} cont_inner_factor{}}
+rule cont_inner_factor{digit_{r -1} cont_inner_factor{r -1 s .9999}}
+rule cont_inner_factor{supdigit_{r -1} end_inner_factor{ r -1 s .9999}}
+rule cont_inner_factor 2{end_inner_factor{}}
+rule end_inner_factor{multop_{r -1} start_inner_factor{r -2 s (.9999^2)}}
+rule end_inner_factor 2{end_inner_term{}}
+
+// --- rules for inside two set of parentheses ---
+rule start_inner_factor .5 {lbracket_{}	start_innerinner_term{r -1 s .9999}}
+
+rule start_innerinner_term{start_innerinner_factor{}}
+rule end_innerinner_term 3{addop_{r -1.5} start_innerinner_term{r -3 s (.9999^3)}}
+rule end_innerinner_term{rbracket_{r -1} end_inner_factor{r -1 s .9999}}
+rule end_innerinner_term{rbracket_{r -1} supdigit_{r -2} end_inner_factor{r -2 s (.9999^2)}}
+
+rule start_innerinner_factor{nzdigit_{} cont_innerinner_factor{}}
+rule cont_innerinner_factor{digit_{r -1} cont_innerinner_factor{r -1 s .9999}}
+rule cont_innerinner_factor{supdigit_{r -1} end_innerinner_factor{ r -1 s .9999}}
+rule cont_innerinner_factor 2{end_innerinner_factor{}}
+rule end_innerinner_factor{multop_{r -1} start_innerinner_factor{r -2 s (.9999^2)}}
+rule end_innerinner_factor 2{end_innerinner_term{}}
+
+// --- translate all digits to perimeter ---
+rule nzdigit_{nzdigit{y 50}}
+rule digit_{digit{y 50}}
+rule supdigit_{nzdigit{s .9 .7 y 50.5}}
+rule addop_{addop{y 50}}
+rule multop_{multop{y 50}}
+rule lparen_{lparen{y 50}}
+rule rparen_{rparen{y 50}}
+rule lbracket_{lbracket{y 50}}
+rule rbracket_{rbracket{y 50}}
+
+// --- generic digits and operators ---
+rule nzdigit{n1{}}
+rule nzdigit{n2{}}
+rule nzdigit{n3{}}
+rule nzdigit{n4{}}
+rule nzdigit{n5{}}
+rule nzdigit{n6{}}
+rule nzdigit{n7{}}
+rule nzdigit{n8{}}
+rule nzdigit{n9{}}
+
+rule digit 9{nzdigit{}}
+rule digit{n0{}}
+
+rule addop{plus{}}
+rule addop{minus{}}
+rule multop{times{}}
+rule multop{divide{}}
+
+

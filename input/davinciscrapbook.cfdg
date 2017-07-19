@@ -1,0 +1,41 @@
+/*
+	Da Vinci's Scrap Book
+	www.lazymoon.org
+	davinciscrapbook.cfdg
+*/
+
+startshape INIT
+background {b -0.75}
+
+rule INIT {
+	LTURN[b 1 sat 0 h 0 |h 50 |b 0.5]
+	RTURN[b 1 sat 0 h 0 |h 50 |b 0.5]
+}
+
+rule RUN 85{
+	CIRCLE[x 0.0]
+	RUN[x 2]
+}
+rule RUN 5	{LTURN[sat 0.45 ]}
+rule RUN 5	{RTURN[sat 0.45 ]}
+rule RUN 5	{
+	CIRCLE[s 3]
+	RUN[r 90 h 0.1| sat -0.25]
+	RUN[r 45 h 0.1| sat -0.25]
+}
+
+
+rule LTURN 99{
+	SQUARE[s 0.25]	
+	LTURN[x 1 r 10 s 0.999]
+}
+rule LTURN 1 {
+	RUN[s 0.75]
+}
+rule RTURN 99{
+	SQUARE[s 0.25]
+	LTURN[x 1 r -10 s 0.999]
+}
+rule RTURN 1 {
+	RUN[s 0.75]
+}

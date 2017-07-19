@@ -1,0 +1,107 @@
+background {h 233.86 sat 0.8800 b -0.650}
+tile {s 100 x -20 y 10} 
+ 
+startshape SnowStory
+ 
+rule SnowStory {
+   		BG {b 1 hue 240 a -0.5 z -1}
+	   15*{ r 75 x 12 y 60 s .8 a -0.05} Rand{x -60 s 1.2}
+		20*{ r 75 x 20 y 10 s 0.9 a -0.02} Rand{x -30 y -10 s 0.5 a -0.6}
+}
+
+rule Rand {
+		12*{r 30} Snowflake2 {x 1.5 y 8 s .7}
+}
+
+rule Rand{
+		6*{r 30} Snowflake5 {}
+}
+
+rule Rand{
+		5*{r 30} Snowflake4 {}
+}
+
+rule Rand{
+		5*{r 72} Snowflake3 {}
+}
+
+rule Rand{
+		5*{r 72} Snowflake2 {x 7}
+}
+
+rule Rand{
+		7*{ r 50 x 4 y 2}HelperOne{s .8}
+}
+
+rule Rand{
+		6*{r 60} Snowflake2 {x 2 y 1 s .8}
+}
+
+//FIRST SNOWFLAKE
+rule Helper1 {
+    Snowflake1 {r 45}
+    5*{r 72} HelperOne {x 7 s .51}
+}
+ 
+rule HelperOne {
+    Snowflake1{}
+    5*{r 90} Helper1 {x 7 s .51}
+}
+ 
+rule Snowflake1{
+    2*{r -90}CIRCLE {s 10 .8 r 45 b 1}
+    2*{r -90}CIRCLE {s 5 .9 r 45 h 233.86 sat 0.8800 b 0.5}
+    2*{y -5}CIRCLE {s 2 .6 y 2.5 b 1}
+    2*{x -5 }CIRCLE {s 2 .6 x 2.5 r 90 b 1}
+}
+//END OF FIRST SNOWFLAKE
+
+rule Snowflake2{
+     5*{r 90} Helper1{x 7 s .5}
+}
+
+rule Snowflake3{
+	2*{r -90}CIRCLE {s 10 .8 r 45 b 0.5}
+    2*{r -90}CIRCLE {s 5 .9 r 45 b 1}  
+    5*{r 90} Snowflake3 {x 7 y 5 s .5}
+}
+
+rule Snowflake4 {
+      5*{r 90} Snowflake3 {x 7 y 5 s .42}
+}
+
+rule Snowflake5{
+    2*{r -90}CIRCLE {s 10 .2 r 45 b 1}
+    2*{y -5}CIRCLE {s 1 .6 y 2.5 b 1}
+    2*{x -5 }CIRCLE {s 1 .6 x 2.5 r 90 b 1}
+    5*{r 90} Snowflake5 {x 7 s .5}
+}
+
+rule Snowflake5{
+    2*{r -90}CIRCLE {s 10 .2 r 45 b 1}
+    2*{y -5}CIRCLE {s 1 .6 y 2.5 b 1}
+    2*{x -5 }CIRCLE {s 1 .6 x 2.5 r 90 b 1}
+    5*{r 90} Snowflake4 {x 7 s .5}
+}
+
+
+//the background
+rule BG {
+    CIRCLE {s 2}
+    BG {a -.05}
+}
+rule BG {
+    BG {s .8 y 30}
+    BG {s .7 y -30 sat .1 z -.5}
+}
+rule BG 5 {
+    BG {r 50}
+}
+rule BG 5 {
+    BG {x 10}
+}
+
+ 
+ 
+
+

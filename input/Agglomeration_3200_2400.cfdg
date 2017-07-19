@@ -1,0 +1,29 @@
+startshape Canvas // Render (3200*2400)
+CF::Background=[h 30 sat 0.8 b 0.75]
+CF::Size=[s 1600 1200]
+CF::ColorDepth=16
+CF::Impure=1
+G=(1+sqrt(5))/2
+number Saw(X,S)=X-S*(0.5+floor(X/S))
+
+shape Canvas
+{ loop  X=-1599.5,1600,1 []
+   loop Y=-1199.5,1200,1 []
+    Dot(1600,X/2,Y/2)[h 25 b 0.3]
+}
+
+shape Dot(S,X,Y)
+{ if (S>1600/G^7)
+  { Dx=Saw(2*X+cos(Y*360/S+56)/G*S,S)
+    Dy=Saw(2*Y-sin(X*360/S-08)/G*S,S)
+    R =sqrt(Dx^2+Dy^2)/S-0.5
+    if (R<-0.02) { //--------- IN ---
+      Dot(S/G^1,X,Y)[b -0.1 sat  0.5]
+      SQUARE [x X Y  b -0.2   a -0.5]
+    } else if (R<0.02) { //--- ON ---
+      if (abs(R)<0.012)
+           SQUARE [x X Y b  1 a -0.2]
+      else SQUARE [x X Y b -1 a -0.2]
+    } else { //-------------- OUT ---
+      Dot(S/G^2,X,Y)[b  0.6 h 12]
+} } }

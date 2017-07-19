@@ -1,0 +1,11 @@
+startshape THREE
+
+rule THREE {
+	sOne [ x -1 ]sTwo [ x 0 ]sThree [ x 1 ]
+}
+
+rule sOne { sBase [ hue 35 sat 75 b 80 ] }
+rule sTwo { sBase [ hue 75 sat 75 b 80 ] }
+rule sThree { sBase [ hue 195 sat 75 b 80 ] }
+
+rule sBase { SQUARE [ size 0.8 r -27 ] }

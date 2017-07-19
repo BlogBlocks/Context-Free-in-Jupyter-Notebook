@@ -1,0 +1,22 @@
+startshape Go
+
+background { b -1 }
+
+rule Go{
+	100 * { r 3.65 } Wave { h 210 sat .3 }
+}
+
+rule Wave {
+	CIRCLE {}
+	Wave { y .17 z .1 r .4 s .995 b .0004 }
+}
+
+rule Wave .01{
+	Wave {}
+	Wave { r 3 }
+}
+
+rule Wave .001{
+	Wave {}
+	Wave { r 15 }
+}

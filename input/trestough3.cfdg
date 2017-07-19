@@ -1,0 +1,21 @@
+startshape tres
+
+rule tres {
+	3* { r 120 } do { y .3 }
+}
+
+rule do {
+	30* { r 12 } tough { s .4 y .5}
+}
+rule tough {
+	d { s .2 1.1}
+	step { y .7 s .6 }	
+}
+rule step {
+	d { s .3 }
+	do { y .15 s .3 }
+}
+rule d {
+	SQUARE { } 
+	CIRCLE { b 1 }
+}

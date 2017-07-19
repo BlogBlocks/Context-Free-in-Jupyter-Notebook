@@ -1,0 +1,66 @@
+startshape lines
+background {b -1}
+ 
+rule lines {
+    sq {s .1 a -.6 b 1 sat 1}
+    lines {r 90 x 8 s .8 h 20 z -1}
+}
+rule lines  {
+    sq {s .1 a -.6 b 1 sat 1}
+    lines {r 90 x 8 s .8 h 20 z -1}
+    lines {r -90 x 8 s .8 h 10 z -1}
+}
+rule lines {
+    sq {s .1 a -.6 b 1 sat 1}
+    lines {r 90 y 8 s .8 h 20 z -1}
+}
+rule lines  {
+    sq {s .1 a -.6 b 1 sat 1}
+    lines {r 90 y 8 s .8 h 20 z -1}
+    lines {r -90 y 8 s .8 h 10 z -1}
+}
+rule lines  {
+    sq {s .1 a -.6 b 1 sat 1}
+    lines {r 90 x 8 s .8 h 20 z -1}
+    lines {r -90 y 8 s .8 h 10 z -1}
+}
+rule lines  {
+    sq {s .1 a -.6 b 1 sat 1}
+    lines {r 90 y 8 s .8 h 20 z -1}
+    lines {r -90 x 8 s .8 h 10 z -1}
+}
+
+rule sq {
+    thin {b 0}
+    thin {s .99 x .5 y .5 b .1}
+    thin {s .98 x .5 y .5 b .2}
+    thin {s .97 x 1 y 1 b .3}
+    thin {s .96 x 1 y 1 b .4}
+    thin {s .95 x 2 y 2 b .5}
+    thin {s .94 x 2 y 2 b .6}
+    thin {s .93 x 3 y 3 b .7}
+    thin {s .92 x 3 y 3 b .8}
+    thin {s .91 x 4 y 4 b .9}
+    thin {s .9 x 5 y 5 b 1}
+}
+
+rule thin {
+    angle{}
+    angle {flip 136 x 103 y 90}
+}
+
+rule angle {
+    fuzz{}
+    fuzz{flip 44}
+}
+
+rule fuzz { 
+    ln {} 
+}
+
+rule ln {50 * [x 2] gr {} }
+
+rule gr { gr {y 1} }
+rule gr { bit {x 1} }
+
+rule bit { SQUARE {} }

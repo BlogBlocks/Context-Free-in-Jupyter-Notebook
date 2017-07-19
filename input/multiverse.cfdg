@@ -1,0 +1,169 @@
+/*
+	Multiverse
+
+	By AK
+
+	Inspired by cover of NewScientist 14/08/2010
+	Also inspired by M.C.Escher (square limit, etc)
+	Also Schrodinger
+	Also the guy who thought up Schrodinger's cat
+	in the parallel universe in which Schrodinger
+	didn't exist.
+
+	Variants: CAT
+
+	http://creativecommons.org/licenses/by-sa/2.5/au/
+*/
+
+startshape START
+background{sat .8 b -.8}
+size{ s 5}
+
+rule START{
+	CUBELIMIT{h 200 sat .2 b .5}
+	BG{z -99}
+	}
+
+rule CUBELIMIT{
+	CUBE{}
+	A{s .5 y 1 z -1}
+	C{s .5 x (sqrt(.75)) y .5 z -1}
+	E{s .5 x (sqrt(.75)) y -.5 z -1}
+	G{s .5 y -1 z -1}
+	I{s .5  x (-sqrt(.75)) y -.5 z -1}
+	K{s .5  x (-sqrt(.75)) y .5 z -1}
+	}
+
+rule A{ // 12 oclock
+	CUBE{}
+	A{s .5 y 1 z -1 b -.2}
+	B{s .5 x (sqrt(.75)) y .5 z -1 b -.2}
+	L{s .5 x (-sqrt(.75)) y .5 z -1 b -.2}
+	}
+
+rule B{ // 1 oclock
+	CUBE{}
+	B{s .5 y 1 z -1 b -.2}
+	B{s .5 x (sqrt(.75)) y .5 z -1 b -.2}
+	}
+
+rule C{ // 2 oclock
+	CUBE{}
+	B{s .5 y 1 z -1 b -.2}
+	C{s .5 x (sqrt(.75)) y .5 z -1 b -.2}
+	D{s .5 x (sqrt(.75)) y -.5 z -1 b -.2}
+	}
+
+rule D{ // 3 oclock
+	CUBE{}
+	D{s .5 x (sqrt(.75)) y .5 z -1 b -.2}
+	D{s .5 x (sqrt(.75)) y -.5 z -1 b -.2}
+	}
+
+rule E{ // 4 oclock
+	CUBE{}
+	D{s .5 x (sqrt(.75)) y .5 z -1 b -.2}
+	E{s .5 x (sqrt(.75)) y -.5 z -1 b -.2}
+	F{s .5 y -1 z -1 b -.2}
+	}
+
+rule F{ // 5 oclock
+	CUBE{}
+	F{s .5 x (sqrt(.75)) y -.5 z -1 b -.2}
+	F{s .5 y -1 z -1 b -.2}
+	}
+
+rule G{ // 6 oclock
+	CUBE{}
+	F{s .5 x (sqrt(.75)) y -.5 z -1 b -.2}
+	G{s .5 y -1 z -1 b -.2}
+	H{s .5  x (-sqrt(.75)) y -.5 z -1 b -.2}
+	}
+
+rule H{ // 7 oclock
+	CUBE{}
+	H{s .5 y -1 z -1 b -.2}
+	H{s .5  x (-sqrt(.75)) y -.5 z -1 b -.2}
+	}
+
+rule I{ // 8 oclock
+	CUBE{}
+	H{s .5 y -1 z -1 b -.2}
+	I{s .5  x (-sqrt(.75)) y -.5 z -1 b -.2}
+	J{s .5  x (-sqrt(.75)) y .5 z -1 b -.2}
+	}
+
+rule J{ // 9 oclock
+	CUBE{}
+	J{s .5  x (-sqrt(.75)) y -.5 z -1 b -.2}
+	J{s .5  x (-sqrt(.75)) y .5 z -1 b -.2}
+	}
+
+rule K{ // 10 oclock
+	CUBE{}
+	J{s .5  x (-sqrt(.75)) y -.5 z -1 b -.2}
+	K{s .5  x (-sqrt(.75)) y .5 z -1 b -.2}
+	L{s .5 y 1 z -1 b -.2}
+	}
+
+rule L{ // 11 oclock
+	CUBE{}
+	L{s .5  x (-sqrt(.75)) y .5 z -1 b -.2}
+	L{s .5 y 1 z -1 b -.2}
+	}
+
+// three different styles of cube to play with
+rule CUBE{CUBEZ{}}
+
+rule CUBEX{
+	3*{r -120 b .4}SQ[s .98 skew 0 30 s (sqrt(.75)) 1 x .5 y -.5 a -0.6]
+	}
+
+rule CUBEY{
+	2*{ r 180 z -0.1 a -0.5}{
+		3*{r -120 b .4}
+			SQ[s .99 skew 0 30 s (sqrt(.75)) 1 x .5 y -.5 a -0.6]
+		}
+	}
+
+rule CUBEZ{
+	2*{ s 1 1 -1 r -180 z -0.1 a -0.5} {
+		3*{r -120 b .5}{
+			2*{x (-.04*sqrt(.75)) y (.04*.5) z -.01}
+				SQ[s rand_static(.5,.95) skew 0 30 s (sqrt(.75)) 1 x .5 y -.5 a -0.6]
+			}
+		}
+	CAT{z -0.05 s .5 b 1 sat 1 h -50}
+	}
+
+rule SQ{
+	SQUARE{}
+	4*{r 90}SQUARE{b -0.6 s .04 1 x .475 a 1}
+	}
+
+
+// Schrodinger's cat - a sprite in green.
+rule CAT 2{}
+rule CAT{KAT{}}
+rule CAT{KAT{f 90}}
+
+rule KAT{
+	CIRCLE{s 1.1 .7 r -20}
+	2*{x -.55 y .3}{2*{x -.3 y -.17}CIRCLE{s .2 x .5 y -.8}}
+	CIRCLE{s .2 x -.35 y 1}
+	CIRCLE{s .45 .4 x .6 y .4 r 30}
+	CIRCLE{s .3 .4 x .65 y .35 r 30}
+	2*{x -.14 y -.08}TRIANGLE{r 30 s .3 x .6 y .55}
+	}
+
+// background
+rule BG{
+	BALL{b .3 |b .8 sat .8 |sat .8 h 0 |h 20 s (5*sqrt(2))}
+	}
+
+rule BALL{
+	CIRCLE{}
+	BALL{s .995 b 0.01| sat 0.01| h 0.01|}
+	}
+
+

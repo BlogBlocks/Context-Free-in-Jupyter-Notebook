@@ -1,0 +1,19 @@
+Sw=0   // Uploaded version: set to 1 
+F =if(Sw, 2.2484143, rand_static(360) )
+N =if(Sw, 16000000 , 4000000)
+S =if(Sw, 0.005    , 0.008)
+
+CF::Background=[b -1]
+CF::ColorDepth=16
+CF::Size=[s 6 4.5]
+CF::Impure= 1
+
+startshape Attract(-0.3,0,0)[r 65 h -18]
+
+shape Attract(i,X,Y) 
+{ CIRCLE [x X Y s S b 1 sat 1 a -0.95]
+  if (i < 1.7)
+  { Xn=cos(72*Y+F)-(1-2*i)*sin(72*X  )
+    Yn=sin(72*X  )+(2-3*i)*cos(72*Y-F) 
+    Attract(i+1/N,Xn,Yn)[h (110/N) z-1]
+} }

@@ -1,0 +1,12 @@
+startshape foo(randint(6,9))
+
+shape rect(natural height) {
+  SQUARE [[y 0.5 s 1 height y 0.5]]
+}
+
+shape foo(natural height) {
+  if (height) {
+    rect(=)[]
+    foo(height -- 1)[x 1]
+  }
+}

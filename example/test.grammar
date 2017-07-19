@@ -1,0 +1,16 @@
+# clauses
+S -> NP VP
+S -> Interj NP VP
+NP -> Det N
+NP -> Det N that VP
+NP -> Det Adj N
+VP -> Vtrans NP   # transitive verbs have direct objects
+VP -> Vintr       # intransitive verbs have no direct object
+
+# terminals
+Interj -> oh, | my, | wow, | damn, | jeez | man | MMM
+Det -> this | that | the | a
+N -> amoeba | dichotomy | seagull | trombone | corsage | restaurant | suburb
+Adj -> bald | smug | important | tame | overstaffed | luxurious | blue | mean | worried
+Vtrans -> computes | examines | foregrounds | prefers | interprets | spins | ignores | pokes
+Vintr -> coughs | daydreams | whines | slobbers | vocalizes | sneezes | points | mummers 

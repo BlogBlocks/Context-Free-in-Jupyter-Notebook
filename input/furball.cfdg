@@ -1,0 +1,45 @@
+startshape START
+background { b -0.8 sat 0.5 hue 170 }
+
+rule START {
+	A { sat 0.5 hue 180 b 1 }
+}
+
+rule A {
+	START2 { y 25 }
+	START2 { flip 180 y -25}
+	A { s 0.99 r 35 alpha -0.08}
+}
+
+rule START2 {
+	FLOW {  }
+	FLOW { flip 90   }
+}
+
+rule FLOW {
+	SQUARES { x 135 r -8 hue 10 b 0.9 sat 0.8}
+	SQUARES { x -135  hue 300 b 0.9 sat 0.8}
+	SQUARES { y -135 r 8 hue 300 b 0.9 sat 0.8}
+	SQUARES { y 135 hue 10 b 0.9 sat 0.8}
+
+	FLOW { s 0.9 y 10 b 1 sat 1 hue 1}
+}
+
+rule SQUARES {
+	SHAPE {  x 10 y 5 alpha -0.9 s 8 20 } 
+	SQUARES {  x 2 y 15 r 1 s 0.9995  hue -2 b 1 sat -0.1 alpha -0.05}
+}
+
+rule SHAPE{ 
+SQUARE {  x -30 y 10}
+SQUARE {  x 30  y -10}
+SQUARE {  x -20  y -25 r 45 }
+SQUARE {  x 20  y -25 r 45 }
+
+#SHAPE {  s 0.999 r 10 hue 3 b 1 sat 1}
+
+}
+
+rule SHAPE 0.05 {
+	CIRCLE { s 10 alpha -0.5 }
+}

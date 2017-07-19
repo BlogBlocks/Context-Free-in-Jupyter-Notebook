@@ -1,0 +1,22 @@
+CF::Impure=1
+CF::Size=[s 2.1]
+CF::Background=[b-1]
+N=2500000 H=60/N
+
+Px(i)=cos(13*i/99*rand_static(2,5))
+Py(i)=sin(37*i/99+rand_static(240))
+Qx(i)=cos(23*i/99-rand_static(240))
+Qy(i)=sin(11*i/99*rand_static(2,5))
+
+startshape Next(0)[]
+shape Next(i)
+{ D=sqrt((Px(i)-Qx(i))^2+(Py(i)-Qy(i))^2)
+  if (D>0&&D<0.2) loop j=9 []
+     LINE (i+j-4,i+j+4) []
+  if (i<N) Next(i+1) [h H]
+} 
+
+path LINE(i,j)
+{ MOVETO(Px(i),Py(i)) LINETO(Qx(j),Qy(j))
+  STROKE(0.001) [sat 0.8 b 1 a -0.9] 
+}

@@ -1,0 +1,92 @@
+include i_pix.cfdg
+background { sat .2 b -.3 h 30}
+
+
+startshape ARTIST
+
+
+rule ARTIST{
+
+L_5by5 {y -28 x -2 s .7 1}
+F_5by5 {y -28 x -1 s .7 1}
+
+N_5by5 {y -28 x .7 s .5 .8}
+RANDOM_NUMBER_5by5 {s .7 1 y -28 x 2}
+RANDOM_NUMBER_5by5 {s .7 1 y -28 x 3}
+RANDOM_NUMBER_5by5 {s .7 1 y -28 x 4}
+
+FONTANA{}
+}
+
+rule N {}
+
+
+rule FONTANA .3{
+
+
+CONCEPT {}
+
+
+}
+
+rule FONTANA {FONTANA {r 1}}
+
+
+rule CONCEPT .5 {LUCIO{}}
+
+rule CONCEPT {
+CONCEPT{x 6}
+LUCIO{}
+}
+
+
+rule LUCIO { LUCIO {s .97}}
+rule LUCIO { LUCIO {s 1 1.03}}
+rule LUCIO { LUCIO {x .4}}
+rule LUCIO { LUCIO {x -.3}}
+
+rule LUCIO {
+CIRCLE {a  -1 s 15 27}
+STRUT{ r 180}
+STRUT{ flip 180 y -.2 r 180}
+
+}
+
+
+rule TRIP {
+TRIANGLE{ a -.5  y .284}
+}
+
+
+rule STRUT {
+
+CIRCLE{s .7 a  -.2  y .2   b  .15  z 1 h 10}
+
+CIRCLE{s .05 1 a  -.2  x .4   b -1  z 2 h 10}
+CIRCLE{s .05 1 a  -.3  x -.4   b 1  z 2 h 10}
+
+TRIP{s 1 3  a -.8  r 90 y .2 }
+TRIP{s 1 3  a -.8  r 90 y .2 flip 180 b 1 }
+STRUT {s .99 y .2 r .15}
+
+}
+rule STRUT .4 {
+STRUTA {flip 90}
+}
+
+
+rule STRUTA {
+CIRCLE{s .7 a  -.2  y .2   b  .15  z 1 h 10}
+
+CIRCLE{s .05 1 a  -.2  x -.4   b -1  z 2 h 10}
+CIRCLE{s .05 1 a  -.3  x .4   b 2  z 1 h 10}
+
+TRIP{s 1 3  a -.8  r 90 y .2 b 1 }
+TRIP{s 1 3  a -.8  r 90 y .2 flip 180  }
+STRUTA{s .99 y .2 r .15}
+
+}
+
+rule STRUTA .3 {
+STRUT {flip 90}
+}

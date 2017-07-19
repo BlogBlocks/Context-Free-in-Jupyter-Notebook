@@ -1,0 +1,52 @@
+/*
+	Grain
+
+	By AK, June 2010
+
+	Variations: n/a (deterministic)
+*/
+
+startshape S
+
+background { b -.5 sat 1 h 40 }
+
+size{ s 3 4 x 1.2 y -1}
+rule S{
+	B{sat .8 h 50 r 30}
+	A{s 2 -4 r -60 a -1 sat 1 h 70 x -0.1 y 0.6  z -55}
+	G{ s 5 h 40  sat .5 |sat 1 |b .8 x -1 y 2.5 z -999 }
+	}
+
+// main recursion rule
+rule B{
+	2*{ f 90 y .5 s .9 .84 }{
+		A{a -0.99 r 80 x .3 b 1 |b 0.1}
+		C{a -0.99 f 50 x -.7 z -1 s .8 1 b 1 |b 0.05}
+		}
+	B[ r 3 y .5 s .9 .84 y .5 s .9 .84 z -1]
+	A{s 4 -3 r -90 a -.99 sat 1 h 30 x .4 y -1.2  z -40}
+	}
+
+// inner grains
+rule A{
+	D{y .2}
+	A{ s .99 .95 x .02  r .3 a .002 b 0.1|}
+	}
+
+// outer grains
+rule C{
+	D{y .4}
+	C{s .99 .95 x .02  r .3 a .002 b 0.1|}
+	}
+
+// payload
+rule D{
+	4*{r 30}TRIANGLE{ b .6 }
+	CIRCLE{}
+	}
+
+
+// --- Background gradient
+rule G{
+	150*{ y .005 b .02| sat .02| }
+		CIRCLE{s 1.25  y -.25}}

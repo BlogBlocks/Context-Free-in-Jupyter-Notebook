@@ -1,0 +1,16 @@
+startshape wooooooo
+//FSR FSY FTH FTM FTO STG STR STZ SUU SWT SYC MCH MCJ MEP MFN MFX 
+
+path wooooooo {
+	MOVETO {}
+	7200*{r rand_static(90) s rand_static(.99,1)} {
+		CURVEREL {
+			x 1
+			y 1
+			x1 rand_static(2)
+			y1 rand_static(2)
+			}
+   		 }
+	CLOSEPOLY{}
+	FILL {p evenodd}
+}

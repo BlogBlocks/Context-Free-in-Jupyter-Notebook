@@ -1,0 +1,53 @@
+startshape UNO
+
+background { b -.95 sat .2 hue 0}
+
+rule UNO
+{
+
+5500* {   r  .5  s  .999998 }  SEMEA { h 260}
+}
+
+rule SEMEA .003 {PUNTO2 {flip 90 y 47}}
+
+rule SEMEA  .01 {SEMEA {r 0.006}}
+
+rule SEMEA  .6 {SEMEA {y -0.009851 x -.0085 sat .004 s .9998 z +1 }}
+rule SEMEA .6 {SEMEA {y -0.009851 x .0085 hue .051 sat -.003 z +1 }}
+
+
+
+
+rule PUNTO2 5 {
+RECTB{  s .061 flip 10 r -10 b 1 z -10 sat +.1 }
+CIRCLE{s .3 b 1}
+}
+
+
+
+
+
+rule RECTB { 
+SQUARE { } 
+RECTB { 
+s 0.99875 
+y -1  
+r 2.317
+ b -.0035 
+ sat +.001 
+hue -.025 
+alpha -.00121}} 
+
+rule RECTB 0.051 { RECTB { flip 90 } } 
+
+
+
+
+
+
+
+
+
+
+
+

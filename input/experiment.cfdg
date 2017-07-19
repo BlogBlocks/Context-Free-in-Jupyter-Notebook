@@ -1,0 +1,11 @@
+startshape BULB
+ 
+rule BULB {
+    WHEEL { }
+    BULB { x 2 r 95 s .9 }
+}
+ 
+rule WHEEL {
+    CIRCLE { }
+    CIRCLE { s .9 b 1 }
+}

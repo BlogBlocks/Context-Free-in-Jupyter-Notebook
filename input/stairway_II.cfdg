@@ -1,0 +1,73 @@
+/*
+	Stairway II
+
+	The other stairway.
+
+	AK Jan 2010
+
+	The profile for the staircase is the graph
+	of the Cantor function, aka "Devil's Staircase".
+	http://en.wikipedia.org/wiki/Cantor_function
+
+	Copyright: http://creativecommons.org/licenses/by-sa/2.5/au/
+*/
+
+startshape S
+
+//background {b 0.8 sat 1 h -10}
+size{x -.5 y -.6 s 1.2 1.5}
+
+rule S{
+	200*{x .0007 y .0004  z -.1 sat .02 b .02 s .9997 .9999}
+		SW[x 1 f 90 skew 0 7 sat .7]
+	30*{x .05}FLAMES{z -99 x -.3}
+	30*{x .05}FLAMES{z 99 x -.3 y -.5 a -.5}
+    	G{h -10 |h 20 sat 1 b .1 r 180 x .5 y .8 z -999 }	}
+
+rule G{
+	240*{ y .005 b .005 h 0.01|}
+        CIRCLE{s 1.25  y -.5}		}
+
+
+rule SW{
+	A{|h 40}
+	USQ{s 3 1 x -1 y -1 h 30}
+	USQ{x 1}		}
+
+rule A{
+	A{s (1/3) (1/2) h 0.3|}
+	ARCH{x (1/3) s (2/3) (1/2)  h 0.3|}
+	A{s (1/3) (1/2) x (2/3) y (1/2)}		}
+
+rule USQ{SQUARE{x .5 y .5}}
+
+path ARCH{
+	MOVETO{}
+	LINETO{x .15}
+	LINETO{x .15 y .5}
+	ARCTO{x .5 y .85 r .35 p cw} 
+	ARCTO{x .85 y .5 r .35 p cw}
+	LINETO{x .85}
+	LINETO{x 1}
+	LINETO{x 1 y 1}
+	LINETO{y 1}
+	LINETO{}
+	CLOSEPOLY{}
+	}
+
+rule FLAMES {FLAMES{x -.02}}
+rule FLAMES {FLAMES{x .02}}
+rule FLAMES {FLAMES{y -.03}}
+rule FLAMES {FLAMES{y .03}}
+rule FLAMES {FL{a -0.9 h 40 b 1 sat 1}}
+rule FL{
+	FE{s .2 .4}
+	FL{s .95 y .025 r -1 a -0.1}		}
+rule FL 0.2{FL{f 90}}
+rule FL 0.01{FL{r -20 s .7} FL{f 100 s .6}}
+rule FL 0.05{FL{s 2 y .2 x .5 r 20}}
+
+rule FE{SQUARE{r 45}}
+rule FE .3{SQUARE{r 30}}
+rule FE .3{SQUARE{r 60}}
+rule FE{CIRCLE{s 1.2}}

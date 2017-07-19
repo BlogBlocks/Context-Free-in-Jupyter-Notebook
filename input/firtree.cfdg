@@ -1,0 +1,71 @@
+background { b -0.2 sat 0.2 h 45 }
+startshape tree
+
+rule tree {
+	SQUARE { s 1 x -0.5 r -25  a -0.5 z -1 h 25 sat 0.5 b 0.4 h 45 }
+	start_branch2 { r 100 s 0.875 2.5 }
+   tree { s 0.998 y .175 r -0.1 a -0.005 z -1 }
+}
+
+rule tree {
+	SQUARE { s 1 x 0.5 r 25  a -0.5 z -1 h 25 sat 0.5 b 0.4 }
+	start_branch2 { r -100 flip 90 s 0.875 2.5 }
+	tree { s 0.998 y .175 r 0.1 a -0.005 z -1 }
+}
+
+rule start_branch2 {
+	start_branch2 { r 9 skew -1 -2 }
+}
+
+rule start_branch2 0.2 {
+	start_branch1 { s 0.8 }
+}
+
+rule start_branch1 0.1 { 
+	branch { sat 0.8 h 160 b 0.5 } 
+}
+
+rule start_branch1 { 
+	start_branch1 { s 0.75 }
+}
+
+//rule start_branch1 0.1 { }
+
+rule branch {
+	CIRCLE{ s 1 a -0.9 h -100 }
+	TRIANGLE { s 0.05 7 r 47 x -1 a -0.25 }
+	TRIANGLE { s 0.05 7 r 25 x -1 a -0.25 }
+	TRIANGLE { s 0.05 7 r -20 x 1 a -0.25 }
+   branch { skew -0.1 0 s 0.99 0.975 y 0.5 r -0.15 a 0.01 z 1 h 0.1 }	
+}
+
+rule branch {
+	CIRCLE{ s 1 a -0.9 h -100 }
+	TRIANGLE { s 0.05 7 r 39 x -1 a -0.25 }
+	TRIANGLE { s 0.05 7 r 20 x -1 a -0.25 }
+	TRIANGLE { s 0.05 7 r -20 x 1 a -0.25 }
+   branch { skew -0.1 0 s 0.99 0.975 y 0.5 r -0.15 a 0.01 z 1 h 0.1 }	
+}
+
+rule branch {
+	CIRCLE{ s 1 a -0.9 h -100 }
+	TRIANGLE { s 0.05 7 r 51 x -1 a -0.25 }
+	TRIANGLE { s 0.05 7 r 30 x -1 a -0.25 }
+	TRIANGLE { s 0.05 7 r -30 x 1 a -0.25 }
+   branch { skew -0.1 0 s 0.99 0.975 y 0.5 r -0.15 a 0.01 z 1 h 0.1 }	
+}
+
+rule branch 0.05 {
+	branch {}
+	branch { r 20 s 0.75 h -10 a -0.25 }
+}
+
+rule branch 0.05 {
+	branch {}
+	branch { r 30 s 0.8 h -10 a -0.25 }
+}
+
+rule branch 0.2 {
+	branch {}
+	branch { r -25 s 0.5 h 5 a -0.25 }
+}

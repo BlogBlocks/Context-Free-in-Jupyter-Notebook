@@ -1,0 +1,74 @@
+/* 
+	Intersecting Crystals.
+
+	Coded by AK November 2008
+
+	Nice variants:
+		VRK
+*/
+
+startshape START
+
+tile{}
+background {  b -1 }
+
+rule START {
+	42* { hue +60 }  CRYSTAL {  sat 0.1 b 0.7 } 
+	200 * { z -0.02 } SQUARE { a -0.997 b 0 z 0.5 }
+	}
+
+
+// some random walks to mix up position and colour
+rule CRYSTAL { CRYSTAL { r 222 } }
+rule CRYSTAL { CRYSTAL { hue 222 }}
+rule CRYSTAL { CRYSTAL { b 0.05 } }
+rule CRYSTAL { CRYSTAL { b -0.05 } }
+rule CRYSTAL { CRYSTAL { sat 0.001 } }
+rule CRYSTAL { CRYSTAL { sat -0.001 } }
+rule CRYSTAL { CRYSTAL { x 1 } }
+rule CRYSTAL { CRYSTAL { z 0.02 } }
+rule CRYSTAL { CRYSTAL { z -0.02 } }
+rule CRYSTAL 0.02 { CRY {} }
+
+// some lesser random walks to mix up crystal geometry
+rule CRY { CRY { s 0.9 1 1 } }
+rule CRY { CRY { s 1.1 1 1 } }
+rule CRY { CRY { s 1 1 0.9 } }
+rule CRY { CRY { skew 0 5 } }
+rule CRY { CRY { skew 0 -5 } }
+rule CRY 0.5 { prism { s 0.1 0.1 0.5 } }
+
+// a prism of some random length
+rule prism { prismend{} prismsides{}}
+rule prismsides 4 { prismsides { y -1 z -1 } twosides {} }
+rule prismsides 1 { twosides {} }
+
+rule twosides { 
+	SQ [ x 1 
+		skew 0 -20 
+		x -1 y -1 
+		b -0.2]
+	SQ [ x 1 
+		skew 0 30 
+		s -0.866 1
+		x -1 y -1 
+		b +0.2]
+	}
+rule prismend { 
+	SQ [ x 1 
+		skew 60 -20 
+		s 1 -.5 1 
+		x -1 y -1]
+	}
+
+
+rule SQ { // textured square slanted in 3-D
+	A { s 0.5 0.5 0.5 }
+	SQUARE { x 0.5 y 0.5 b 0.2  }
+	}
+rule SQ { SQ { b +0.02 }}
+rule SQ { SQ { b -0.02 }}
+
+rule A { B {  } B { x 1  z 1 }  }
+rule B { SQ {} SQ {y 1 z 1} }
+

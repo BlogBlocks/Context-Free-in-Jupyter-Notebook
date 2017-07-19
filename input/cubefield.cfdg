@@ -1,0 +1,53 @@
+startshape ZCUBES
+
+background {b -.5}
+
+rule ZCUBES {
+	2*{s -1 1} ZCUBE {}
+}
+
+rule ZCUBE {
+	XCUBE {}
+	XCUBE {x -1 y .58 s .98 z -1}
+	DCUBE {y -1 s .99 z -1}
+	ZCUBE {x 1 y .58 s .98 z -1}
+}
+
+rule XCUBE {
+	CUBE {}
+	XCUBE {x -1 y .58 s .99 z -1}
+}
+
+rule XCUBE {
+	CUBE {}
+	XCUBE {x 1 y .58 s .99 z -1}
+}
+
+rule XCUBE {
+	CUBE {}
+	XCUBE {y 1 s 1.010101 z 1}
+}
+
+rule XCUBE {
+	CUBE {}
+	XCUBE {y -1 s .99 z -1}
+}
+
+rule DCUBE {
+	CUBE {}
+	DCUBE {y -1 s .99 z -1}
+}
+
+rule DCUBE .09{
+	CUBE {}
+}
+
+
+
+rule CUBE{ SIDE{s -1 1}SIDE{s 1}TOP{}}
+
+rule SIDE {FACE{skew 0 30}}
+
+rule TOP {FACE[s 1.413 .816 r 135 b .8]}
+
+rule FACE {SQUARE{x .5 y -.5}}

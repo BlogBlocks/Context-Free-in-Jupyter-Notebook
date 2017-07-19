@@ -1,0 +1,205 @@
+/*
+	bleak
+
+	by AK
+	January 2011
+
+	You don't know how.
+	Only you survive.
+
+	Variations: BLEAK
+
+	http://creativecommons.org/licenses/by-sa/3.0/au/deed.en
+*/
+
+startshape START
+
+size {s 3 2 y .5}
+
+rule START{
+	2*{ s .5 .4 x 1.2 r -5 } {
+		3*{ s .5 .4 x -1 r 5} {
+			T{s 1 .8 y -.2}
+			}
+		}
+	horizon{y .07}
+	3 * { x 1 } trackstart{x -1 s 3 z -5}
+	bodies{b 0 |b 1 z -1}
+	SH{r -50 y -1.2 x 2 s 2}
+	AK{x 1.45 y -1.45 s .05 b 1 |b 0 z 999}
+	}
+
+rule bodies{
+	onebody{ y -1.2 s .15 .1 x -1}
+	2 * { x 2.5 } bodies{s .8 .7 x -1.2}
+	}
+rule bodies .7{}
+rule onebody{onebody{x 1.3}}
+rule onebody{onebody{x -1.3}}
+rule onebody .1{body{}}
+rule onebody .1{}
+
+// mound element with shadow
+rule T 5{T{x .21}} 
+rule T 5{T{x -.21}}
+rule T{
+	SH[y -1 r -70 z -2 y 1 x .01]
+	S{|b 1}
+	}
+
+// mound element
+rule S{
+	2*{s -.98 .99 .99 y -.01 b 1| }A{ y -1 x .01 z -1}
+	S{s .96 .94 .98  r 0 }
+	}
+
+// shadow element
+rule SH{CIRCLE{y -1}
+	SH[ y -.15 s .95 .91 y .15]}
+
+// component of mound element
+rule A{CIRCLE{}}
+//rule A .01{CIRCLE{z -.2}}
+rule A .1{CIRCLE{y -.01}}
+rule A .1{CIRCLE{y .01}}
+
+
+// tricks with circles to get horizon and shading in black/white
+rule horizon{
+	20 * { y .0209 z -.05 } CIRCLE[b 1 z -9 y -.015 s 10 3 0 y -.5 ]
+	20 * { y .02 z -.05 } CIRCLE[z -9.01  s 9.5 3 0 y -.5]
+	}
+
+// tracks.  uses random walks via skewing
+rule trackstart{trackstart[ skew 15 0]}
+rule trackstart{trackstart[ skew -15 0]}
+rule trackstart .1{track{}}
+rule trackstart{trackstart{ s .99}}
+rule trackstart{trackstart{ s 1.01}}
+
+rule track{
+	TT{s .04 .015 y -1}
+	tracknext{f 90}}
+
+rule tracknext{	track{s .98 .97}	}
+rule tracknext{	tracknext[y -1 skew 10 0  y 1]	}
+rule tracknext{	tracknext[y -1 skew -10 0  y 1]	}
+
+// blobs to build tracks from
+rule TT{
+	2*{r 180}TE{}
+	TE{x .8 s 1 .3}
+	}
+rule TE{
+	CIRCLE{s .3 1}
+	TE{s .85 .8 y -.6 x -.05 r 2}}
+rule TE .2{}
+
+
+//-----------
+// A lizard skeleton that has been looking for a home for a while.
+// The idea was to grow a skeleton via "gene expression".
+// It was never good enough to use on its own, but works
+// as part of a larger picture.
+
+rule body {
+	head{ }
+	neck{ }
+	}
+rule body 10{body{r 223}}
+
+rule head{
+	SQUARE[y .5 s .5 .8 r 45 s .7]
+	2*{f 90}SQUARE[ x .15 y .5 b 1| s .15 .1 r 45]
+	}
+
+rule neck{
+	vertibrae{}
+	neck{ y -.1 }
+	}
+
+rule neck{ neck { r 5 }}
+rule neck{ neck { r -5 }}
+
+rule neck .3{shoulders{}}
+
+rule shoulders{
+	SQUARE{s .4 .05}
+	2*{ f 90} foreleg{ x .3 }
+	ribs{y -.1}
+	}
+
+rule ribs{
+	vertibrae{}
+	2*{f 90}TRIANGLE[r -15 x .2 s .35 .03 r - 90]
+	ribs{y -.1}
+	}	
+
+rule ribs{ ribs { r 2 }}
+rule ribs{ ribs { r -2 }}
+
+rule ribs .2{back{}}
+
+rule back 2{
+	vertibrae{}
+	back{ y -.1 }
+	}
+
+rule back{ back { r 10 }}
+rule back{ back { r -10 }}
+
+rule back .2{hips{}}
+
+rule hips{
+	SQUARE{s .2 .1}
+	2*{ f 90} hindleg{ r -15 x .2 }
+	tail{y -.1}
+	}
+
+rule tail{vertibrae{}
+	tail { y -.1 s .93 }}
+
+rule tail{ tail { r 10 }}
+rule tail 0.1{ tail { f 90 }}
+
+rule foreleg{
+	SQUARE{ s .3 .07 x .15 }
+	elbow[x .35 r 30 ]
+	}
+rule foreleg{ foreleg{r 20}}
+rule foreleg{ foreleg{r -20}}
+
+rule elbow{
+	SQUARE{ s .4 .03 x .2 y -.03 }
+	SQUARE{ s .4 .03 x .2 y .03}
+	forefoot{ x .5}
+	}
+
+rule elbow 2{elbow{r 10}}
+rule elbow 2{elbow{r -10}}
+
+rule forefoot{TRIANGLE{s .1 .05 r -90}
+	5*{r -15 s .9}toe[r 30 x .1 ]}
+
+rule toe{SQUARE{s .15 .02 x .1}
+	knuckle{x .2}}
+rule toe{toe{r -4}}
+
+rule knuckle{TRIANGLE[r -20 x .1 s .15 .02 r -90]}
+rule knuckle{knuckle{r 5}}
+rule knuckle{knuckle{r -5}}
+
+rule hindleg{
+	SQUARE{ s .6 .07 x .25 }
+	elbow[x .65 r -30 ]
+	}
+rule hindleg{ hindleg{r 20}}
+rule hindleg{ hindleg{r -20}}
+
+
+rule vertibrae{
+	2*{f 90}SQUARE[x .02 s .05 .04 r 45]
+	}
+
+// A signature (FWIW)
+rule AK{2*{r -30 s sqrt(1/3) b 1|}TRIANGLE{}}

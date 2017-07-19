@@ -1,0 +1,38 @@
+CF::Background = [[brightness -1]]
+
+startshape cloud [[brightness 1 saturation 0.6 hue 180±180 rotate 180±180]]
+
+shape cloud rule 18 {
+	shifted_bubble [[]]
+	cloud [[]]
+} rule 1 {
+	shifted_bubble [[]]
+} rule 4 {
+	pop [[]]
+}
+
+shape shifted_bubble rule 1 {
+	direction = 180±180
+	bubble [[rotate direction transform 270±180 rotate -direction]]
+}
+
+shape bubble rule 1 {
+	loop latitude = 180 [[]]
+		loop longitude = 360 [[]]
+			spot(longitude+180, latitude-90, 0) [[alpha -0.92]]
+}
+
+shape pop rule 1 {
+	loop latitude = 60 [[]]
+		loop longitude = 120 [[]]
+			spot(3*longitude+180±5, 3*latitude-90±5, 50±30) [[alpha -0.84]]
+}
+
+shape spot(longitude, latitude, explosion) rule 1 {
+	eks = cos(longitude)*cos(latitude)*(1+0.02*sin(explosion))
+	wai = sin(latitude)*(1+0.02*sin(explosion))
+	zee = sin(longitude)*cos(latitude)
+	distance = 2+zee
+	shine = -0.3+0.2*cos(longitude)+cos(longitude±180)*sin(explosion)
+	CIRCLE [[transform (90*eks/distance) (90*wai/distance) rotate (atan2(wai,eks)-45) skew explosion explosion brightness shine hue (longitude)]]
+}

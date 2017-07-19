@@ -1,0 +1,71 @@
+
+include i_pix.cfdg
+background { b -.87 sat .31 hue 52}
+
+startshape GENERATOR
+
+
+
+rule GENERATOR{
+CIRCLE{s 150 alpha -.15 sat .5  b 1}
+22600 * {} punto { h 0 sat .5  r 220}
+
+
+}
+
+
+rule punto .05 { punto2{s .3 y -110 b .2 }}
+rule punto {  punto{ r +.5}}
+rule punto {  punto{ r -.5}}
+
+rule punto {  punto{ r +1.1}}
+rule punto {  punto{ r -1}}
+rule punto {  punto{ r +2.3}}
+rule punto {  punto{ r -2}}
+rule punto {  punto{ r +4.5}}
+rule punto {  punto{ r -4}}
+rule punto {  punto{ r +8.7}}
+rule punto {  punto{ r -8}}
+rule punto {  punto{ r +16.7}}
+rule punto {  punto{ r -16}}
+
+rule punto2 .17{ 
+CIRCLE{s 60 alpha -.885}
+
+CIRCLE{s 7 alpha -.97  sat -1 b -1}
+RECTB{ s -1.5 r 0 b -.53  alpha -.8 h -40 sat -.1}
+}
+
+rule punto2  {  punto2{ y +5}}
+//rule punto2  {  punto2{ y +8}}
+rule punto2  {  punto2{ y +4}}
+rule punto2 {  punto2{ y +2}}
+rule punto2 {  punto2{ y +1}}
+rule punto2 {  punto2{ y +.5}}
+
+
+rule punto2 {  punto2{ x -5}}
+rule punto2 {  punto2{ x +4}}
+rule punto2 {  punto2{ x -2}}
+rule punto2 {  punto2{ x +3}}
+
+rule punto2  {  punto2{ s .99}}
+rule punto2  {  punto2{  b .1 hue 1}}
+rule punto2  {  punto2{  b .07 hue -1}}
+
+rule punto2  {  punto2 {flip 90}}
+
+
+
+rule RECTB { 
+SQUARE { }
+RECTB { s 0.99 y 1   r 1.317 alpha .005 sat -.05 b .05} 
+} 
+
+rule RECTB 0.21 { RECTB { flip 90} } 
+
+rule RECTB 0.051 { 
+RECTB { s .8 } 
+} 
+
+

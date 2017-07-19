@@ -1,0 +1,50 @@
+startshape SCENE
+#Variations : PHA, HEARW, HEASA
+
+CF::Background = [h 10 sat 0.4]
+
+shape SCENE
+{
+	FLOW [h 35 b 1 sat 1]
+}
+
+shape FLOW
+rule {
+	HEART [s 5 h -20]
+	loop 10 [r 35..37 flip 0..360]
+		ARM [z -1]
+}
+
+shape ARM
+rule {
+	SQUARE []
+	ARM [x 1 r 2 s 0.99 h -0.1]
+}
+
+rule 0.0075 {
+	SQUARE []
+	ARM [flip 0]
+}
+rule 0.0075 {
+	ARM []
+	ARM [flip 0]
+	ARM [s 0.9 r 10]
+	ARM [s 0.9 flip 0 r 10]
+}
+rule 0.25 {
+	ARM []
+	CIRCLE [s 10..25 a -0.95 h -15 z -1 x -10..10 y -10..10]
+}
+
+shape HEART
+{
+	HALF [ x -0.4 b 0.6 ]
+ 	HALF [ x  0.4 b 0.6 flip 90 ]
+}
+
+shape HALF
+{
+ 	CIRCLE [ hue 0 sat 1 ]
+ 	HALF [ s 0.94 x 0.0324 y -0.06 r -0.5 h -0.55 b -0.01]
+}
+

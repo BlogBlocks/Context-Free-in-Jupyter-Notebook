@@ -1,0 +1,129 @@
+startshape Scene
+
+CF::Impure = 1
+CF::Background = [b -0.8 sat 1 h 200]
+CF::Size = [s 3]
+
+//random variable that controls how straight the path is
+bend = -5..-1
+
+shape Scene {
+	Path(29.5,0,160..200,0) [s (1/60)]
+
+	loop 10 [s 0.998 a -0.2] Frame [s 0.5 z 1000 b 1 sat 0.4 h 180]
+	loop 10 [s 1.003 a -0.2] Frame [s 0.5 z 1000 b 1 sat 0.4 h 180]
+	Glow []
+}
+
+path Frame 
+{
+	MOVETO(1,1)
+	LINETO(-1,1)
+	LINETO(-1,-1)
+	LINETO(1,-1)
+	CLOSEPOLY()
+	STROKE(0.01) []
+}
+
+shape Path (number px, number py, number pr, number idx)
+rule 4000 {
+
+	// number of steps to take
+	if (idx < 2000) {
+		if (max(abs(px),abs(py)) < 30 )  {
+			
+			//change the values in rand to
+			//alter the behaviour of the beam
+
+			Path( px + cos(pr), py + sin(pr), pr + rand(bend,2), idx + 1 ) []
+
+			// glowing beam
+			transform [x px y py r pr ] {
+				loop 10 [s 1 1.5 a -0.4] SQUARE [
+						b 1 sat 0.4 h 180 s 0.85 0.08]
+			}
+
+		}
+		else {	
+			Flash[x px y py z 1 s 1.5]	
+
+			//detect which edge we have crossed and reflect
+			if (px > 30) {
+				Path(px/1.004 - cos(pr), py+sin(pr), 180-pr, idx +1) []
+				Lightning [ x px y py r -5..5]
+			}
+			if (px < -30) {
+				Path(px/1.004 - cos(pr), py+sin(pr), 180-pr, idx +1) []
+				Lightning [[ x px y py r -5..5 r 180]]
+			}
+			if (py > 30) {
+				Path(px + cos(pr), py/1.004 - sin(pr), pr*-1, idx +1) []
+				Lightning [[ x px y py r -5..5 r 90]]
+			}
+			if (py < -30) {
+				Path(px + cos(pr), py/1.004 - sin(pr), pr*-1, idx +1) []
+				Lightning [[ x px y py r -5..5 r -90]]
+			}
+		}
+	}
+	// done iterating, draw the particle!
+	else { 	Flash[[  x px y py z 1 r pr  s 1.5 0.4 ]]	 }
+}
+
+
+shape Flash{
+	loop 10 [s 1.4 a -0.4] 
+	CIRCLE[b 1 sat 0.4 h 180 s 0.6..1]
+}
+
+shape Lightning 
+rule 10{
+	LightningUnit []
+	Lightning [x 1]
+	Glow2 [s 2 a -0.5]
+}
+rule 1.5 {
+	Lightning[r 30..45]
+	Glow2 [s 4 a -0.5]
+}
+rule 1.5 {
+	Lightning[r -30..-45]
+	Glow2 [s 4 a -0.5]
+}
+rule 1 {
+	// s 0.6 normally
+	Lightning[r 20..45 s 0.6 0.8 a -0.5]
+	Lightning[r -20..-45 s 0.4 0.8 a -0.5]
+	Glow2 [s 4 a -0.5]
+}
+
+
+
+shape LightningUnit {
+	loop 20 [s 1 1.1 a -0.2] 
+	SQUARE [b 1 sat 0.4 h 180 s 0.89 0.1 x 0.5]
+}
+
+
+shape Glow {
+	loop 30 [s 0.97 a -0.04  ] 
+	CIRCLE [s 2.3..2.5 x -0.1..0.1 y -0.1..0.1 b 1 sat 0.6 h 180 a -0.97]
+}
+
+shape Glow2 {
+	loop 5 [s 0.7 a -0.4 ] 
+	CIRCLE [s 2.3..2.5 x -0.1..0.1 y -0.1..0.1b 1 sat 0.4 h 180 a -0.99]
+}
+
+
+// BNR AKL ABD VFF VFJ VFL VFP
+
+
+
+
+
+
+
+
+
+

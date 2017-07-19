@@ -1,0 +1,36 @@
+startshape makerings(0,100,.5,.99) [ sat 1 b .1 ]
+
+CF::Impure = 1
+
+shape makerings (number from, number to, number trn, number scl)
+
+rule  {
+	basex = .5 +/- .1
+	basey = .5 +/- .1
+	sclx = .99 +/- .1
+	scly = .1 +/- .1
+
+	loopx = .09 +/- .01
+	loopy = .01 +/- .01
+
+	targethue = 200..300
+
+	loop i=from,to [ r trn s scl x loopx loopy hue .05 targethue]
+		ring(10, basex + sclx*sin(8*i), basey + scly*cos(8*i)) []
+	finally
+		makerings(to, to + floor(100..200), trn,
+				  if(scl < 1, 1.0085, .99) ) [ a .1 -.5 ]
+}
+
+rule .1 {
+	makerings (=) []
+	makerings(from, to, -trn, scl) []
+}
+
+path ring (number far, number cx, number cy){
+
+	CURVETO (far, 0, cx, cy)
+	CURVETO (0, 0, -cx, -cy, CF::Continuous)
+
+	STROKE(0.009) []
+}

@@ -1,0 +1,46 @@
+startshape begin
+
+rule begin {
+	recur {}
+}
+
+rule recur 0.01 {}
+rule recur 10 {
+	malfgrid {}
+	recur {}
+	}
+
+//increase this first
+//malfgrid rule weight
+//to make lines shorter
+
+rule malfgrid 0.002 {}
+rule malfgrid 10 {
+	CIRCLE {}
+	malfgrid {
+		y .1
+		r 1
+		s .999
+	}
+}
+rule malfgrid 10 {
+	CIRCLE {}
+	malfgrid {
+		y .1
+		r -1
+		s .999
+	}
+}
+rule malfgrid .2 {
+	CIRCLE {}
+	malfgrid { flip 45 }
+}
+rule malfgrid .2 {
+	CIRCLE {}
+	malfgrid {
+		flip -45
+		b .1
+		sat 1
+		hue 1
+	}
+}

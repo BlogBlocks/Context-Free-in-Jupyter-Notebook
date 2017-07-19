@@ -1,0 +1,4 @@
+var grammar = new RiGrammar();
+grammar.addRule('<start>', 'Once upon a time, there was a <adj> <hero>.');
+grammar.addRule('<hero>', 'fairy | unicorn | dragon | bear');
+grammar.addRule('<adj>', 'smart | pretty | smelly | funny | angry');

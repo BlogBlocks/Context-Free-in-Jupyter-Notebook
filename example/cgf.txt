@@ -1,0 +1,14 @@
+80 <S> = My homework is late because <reason>.
+20 <S> = I want to <action> instead of writing this program.
+40 <reason> = <who> ate it
+40 <reason> = I set it on fire because I was cold
+20 <reason> = I didn't feel like doing it
+30 <who> = Deep Shah
+70 <who> = my pet <animal>
+10 <animal> = dog
+20 <animal> = narwhal
+50 <animal> = python
+20 <animal> = velociraptor
+30 <action> = go on a vacation
+30 <action> = indulge in a giant feast
+40 <action> = frolic in the snow

@@ -1,0 +1,41 @@
+startshape Shards
+
+//tile { s 8.5 11 }
+
+background { b 1 
+// alpha -1
+}
+
+rule Shards {
+	Bar { }
+	Bar { r 90 s -1 1 }
+}
+
+rule Bar {
+	Fragment { }
+	Bar { y 1 s .8 1 }
+}
+
+rule Bar {
+	Fragment { }
+	Bar { x .1 y .2 s .6 .8 }
+}
+
+rule Bar .25 {
+	Bar { r 15 }
+	Bar { }
+}
+
+rule Bar .3 {
+	Shards { }
+}
+
+rule Fragment {
+	SQUARE { skew 60 -30 r 60  hue 230 sat .375 b 1 alpha -.9}
+	SQUARE {x .1 y -.0375 skew 60 -30 hue 200 sat .375 b 1 alpha -.99}
+}
+
+rule Fragment {
+	SQUARE {x .1 y .0375 skew 60 -30 hue 225 sat .375 b 1 alpha -.97}
+	SQUARE {x .225 y 0 skew 60 -30 hue 190 sat .375 b 1 alpha -.96}
+}

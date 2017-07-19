@@ -1,0 +1,43 @@
+startshape init
+
+tile [s 1]
+
+rule init{
+	partA[]
+}
+
+rule partA{
+	SQUARE[b 0 sat 0]
+	partB[x 0.25 y -0.25 s 0.75 b 0.3]
+	partB[x -0.25 y -0.25 s 0.75 b 0.3]
+	partB[x 0.25 y 0.25 s 0.75 b 0.3]
+	partB[x -0.25 y 0.25 s 0.75 b 0.3]
+}
+
+rule partB{
+	SQUARE[sat 1 alpha -0.1 hue 280]
+	partB[x -0.25 y -0.25 s 0.75 b 0.1]
+}
+
+rule partB{
+	SQUARE[sat 1 alpha -0.1 hue 280]
+	partB[x -0.25 y -0.25 s 0.75 b 0.1 hue -5]
+}
+
+rule partB{
+	SQUARE[sat 1 alpha -0.1 hue 280]
+	partB[x -0.25 y -0.25 s 0.75 b 0.1]
+	partB[x 0.25 y 0.25 s 0.75 b 0.1 hue -5]
+}
+
+rule partB .08{
+	partB[s 1 2]
+	partB[s 1 2]
+	partB[s 2 1]
+	partB[s 2 1]
+}
+
+rule partB .05{
+	partB[r 180]
+	partB[r 90]
+}

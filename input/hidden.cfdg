@@ -1,0 +1,24 @@
+startshape O
+
+background { b -.9 sat .8 hue 210 }
+tile { s 20 }
+
+rule O{
+45*{s .99}Va{sat 1}
+CIRCLE{s 9 b .6 sat .6 hue 180 z 90 alpha -.75}
+}
+
+rule Va 10{Vb{}}
+rule Va {Va{hue 30}}
+
+rule Vb 1000{SQ{}Vb{x 1 y .05 r 3 s .99 b .001 z 1}}
+rule Vb 100{Vb{}Vb{r -9 s .3 -.3 b .05}}
+rule Vb 10{3*{r -9}Vb{s .6 b .1 sat -.3}}
+rule Vb {Vb{flip 0}}
+
+rule SQ { S{} }
+rule SQ 10{SQ{s 1.03} }
+rule SQ 10{SQ{r 7} }
+rule SQ 10{SQ{y .1} }
+
+rule S{SQUARE{b .1 hue 180 alpha -.8}}

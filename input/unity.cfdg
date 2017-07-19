@@ -1,0 +1,33 @@
+background {b -.5 sat .2 hue 60}
+
+startshape UNITY
+
+rule UNITY {
+	3 * {r 120 hue 110} FOIL {y .65 sat 1 hue -60}
+}
+
+rule FOIL {
+	3 * {r 120} SEGMENT {}
+	3 * {r 120} SEGMENT {f 0}
+	3 * {r 120} HIGHLIGHTS {r 61}
+	3 * {r 120} HIGHLIGHTS {f 30}
+}
+
+rule SEGMENT {
+	60 * {r 1 z 1 hue 1} BRUSH {x 1 s .5}
+}
+
+rule HIGHLIGHTS {
+	60 * {r 1 z -1 a -.04} BLUR {x 1.17 z 65 a -.9 b 1 sat -1 s .025}
+}
+
+rule BRUSH {
+	30 * {x .02 b .2 hue 1 s .95 1.01 z .1} SQUARE {b .2 s 1 .1}
+	BLUR {z -15 a -.995}
+}
+
+rule BLUR {
+	CIRCLE {s 2}
+	CIRCLE {s 1.5}
+	CIRCLE {s 1.2}
+}

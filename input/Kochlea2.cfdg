@@ -1,0 +1,44 @@
+background{b -1}
+startshape init
+rule init{turn[b 1 a -1 sat 1 h 310]}
+rule turn{
+	SQUARE[x .5 y -.05 s 1 .1]
+	CIRCLE[x 1.77 y .13 s .5]
+	turn[z 1 r -2.07028 s 0.298966      a .1 h 90 sat -.3]
+	turn[z 1 x 1 r 45.9297 s .324258    a .1 sat .1]
+	turn[z 1 x 1.72574 y .806014 r -48 s .922]
+}
+
+
+
+
+/*       C...
+         /\@
+        /  \
+       /    \D____E
+A____B/@...  
+
+variables:
+@ angle = 48 degress
+$ scale = lengthCD/lengthAB = .922
+
+constraints:
+lengthDE = lengthAB
+lengthBC*lengthCD = lengthAB^2
+
+A=(0,0) B=(1,0)
+C=( 1+cos(@)/$ , (sin(@)/$ )
+D=( 1+cos(@)*(1/$+$) , sin(@)*(1/$-$) )
+E=D+(1,0)
+
+Adjustment parameter values:
+turn1:  r1=angleAB-angleAE   s1=lengthAB/lengthAE
+turn2:  r2=@+r1   s2=s1/$
+turn3:  x3=lengthAB*(1+cos(@)/$)   y3=sin(@)/$   r3=-@   s3=$ 
+
+Descent:
+turn1 builds AB
+turn2 builds BC
+turn3 builds CG
+*/
+

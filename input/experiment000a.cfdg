@@ -1,0 +1,60 @@
+startshape picture
+background{b -1}
+ 
+tile{s 3 y -.6 x -1.9}
+rule picture{
+    glow{h 2.49 sat 0.5116 }
+    glow{h 225.00 sat 0.0157}
+ 
+}
+ 
+ 
+ 
+rule glow{
+    SQUARE{b 1 a -.99 }
+    glow{s .999 x .1 r 10}
+    wings{s .1 a -.99}
+    wings{s .1 a -.99 flip 90}
+    star{s .02 b 1 z -1}
+}
+ 
+rule glow{
+    glow{ x -.1 r -10}
+}
+ 
+rule glow{
+    glow{ y -.1 r 10}
+}
+ 
+rule glow{
+    glow{ y .1 r -10}
+}
+ 
+rule wings{
+    30*{x .9 r 5 s .9}SQUARE{s 1 2}
+ 
+}
+ 
+rule star{
+    CIRCLE{}
+ 
+}
+ 
+rule star{
+CIRCLE{}
+ 
+    star{  s .9}
+}
+ 
+rule star{
+CIRCLE{}
+ 
+    star{s 1.5}
+}
+ 
+rule star 2{
+ 
+}
+ 
+//gpn
+ 

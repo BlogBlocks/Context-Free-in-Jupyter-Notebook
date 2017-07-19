@@ -1,0 +1,78 @@
+// derivate from
+// goldstar by Sam Suan Chen
+// id=2343
+// link tag: [link design:2343]
+// 
+//
+//-----------------------------------------------------------------------------
+startshape Compo
+background{b -.3 sat .12 hue 60}
+tile {s 30 24 y -9}
+//-----------------------------------------------------------------------------
+rule Compo {
+	Tronc{z -36}
+	2*{flip 90}Gazon{y -1.5 z 39}
+	Brume{z -1500 b 1 y 9.9 s 30 39 sat 1 h 180}
+	SQU{z -1000 y 9 s 30 11}
+	Brume{z -500 b 1 y 9 s 30 6}
+	Sun{z - 1200 x 6 y 18 s 12}
+}
+rule SQU{
+	SQUARE{y -.5 sat .5 hue 120}
+	SQU{s 1 .96 b .006}
+}
+rule Brume{SQUARE{alpha -.99}Brume{s 1 .9}}
+rule Sun{CIRCLE{b 1 alpha -.99}Sun{s .96}}
+//-----------------------------------------------------------------------------
+rule goldstar{6*{r 144}angle{}}
+ 
+rule angle{
+	150*{s .96 b .1 h .24	}
+	CIRCLE{s .6 z 2 h -24 b .3 sat 1}
+	60*{s 1.006 h .24 a -.3}
+	CIRCLE{s .6 z 1 h -24 a -.9}
+	150*{h 3 r .1 s 0.97} 
+	TRIANGLE{ h -30 r 180 sat 1 b 1 y-1 a-.95}
+	150*{r .1 s 0.97} 
+	TRIANGLE{ h -30 r 180 b .3 sat 1 s 1.2 y-1 a-.0 z -1}
+}
+//-----------------------------------------------------------------------------
+rule Tronc {
+	3*{s .9 z 10}Branche{}
+}
+rule Branche 30{
+	CIRCLE{b .6 sat .77 hue 150 alpha -.5 z -2}
+	CIRCLE{s .3 .8 x -.3 b .3 sat 1 hue 175 alpha -.5 z -1}
+	CIRCLE{s .3 .8 x .2 b .9 sat 1 hue 120 alpha -.5}
+	Branche {y .2 r .3 s .99 z -1}
+}
+rule Branche .6{
+	2*{flip 90}RotBranche {z -10}
+}
+rule Branche .2{
+	goldstar{s 2 z 30}
+}
+rule RotBranche 15{
+	RotBranche {r 1}
+}
+rule RotBranche 6{
+	RotBranche {s .993}
+}
+rule RotBranche {
+	Branche {}
+}
+//-----------------------------------------------------------------------------
+rule Gazon{PosHerbe{s .3}Gazon{x 1.5 y .01 s .9991 z -.3}}
+
+rule  PosHerbe 10{PosHerbe{x .13}}
+rule  PosHerbe {Herbe{}}
+rule  PosHerbe .006{Tronc{s 2 z -10}}
+
+rule Herbe {Section{}Herbe {y .2 r .6 s .93 b .02}}
+rule Herbe {Section{}Herbe {y .2 r .6 s .99 b .02}}
+rule Herbe .2{Herbe{flip 90}}
+
+rule Section {
+	CIRCLE{sat .77 hue 150 alpha -.5 z -1}
+	CIRCLE{s .3 .8 x .2 b .3 sat 1 hue 120 alpha -.5}
+}

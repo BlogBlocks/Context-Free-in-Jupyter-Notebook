@@ -1,0 +1,75 @@
+startshape START
+background { hue 180 sat 0.1 b 0.9 }
+
+rule START {
+	SCENE { hue 180 sat 0.8 b 0.8 }
+}
+
+rule SCENE {
+	FLOW { }
+	FLOW { flip -90 }
+}
+
+rule FLOW {
+	SQUARE { }
+	FLOW { x 1 s 0.994 r 3}
+}
+
+rule FLOW 0.001 {
+	SQUARE { }
+	CIRCLE { s 15 alpha -0.7 }
+	CIRCLE { s 3 x 17 alpha -0.7 }
+
+	FLOW { x 1 s 0.994 r 3}
+}
+
+rule FLOW 0.01 {
+	SQUARE { }
+	CIRCLE { x 10 s 15 alpha -0.9 }
+	CIRCLE { s 3 x -10 alpha -0.8 }
+
+	FLOW { x 1 s 0.994 r 3}
+}
+
+rule FLOW 0.0008 {
+#	CIRCLE { s 5 }
+	FLOWER { alpha -0.5 x 20 y 20}
+	FLOW { flip -3 }
+}
+
+rule FLOWER {
+	CIRCLE { s 9 2 r 75 x 0.5}
+
+	FLOWER { s 0.9 r 40 }
+}
+
+rule FLOW 0.01 {
+	FLOW { flip 2 }
+}
+
+rule FLOW 0.02 {
+	CIRCLE { s 5 4}
+	FLOW { flip 15 }
+	FLOW { r -45 s 0.4}
+}
+
+rule FLOW 0.01 {
+	SQUARE { }
+	BUBBLE { }
+
+	FLOW { x 1 s 0.994 r 3}
+}
+
+rule FLOW 0.01 {
+	SQUARE { }
+	FLOWER { y 15 alpha -0.7 }
+
+	FLOW { x 1 s 0.994 r 3}
+}
+
+rule BUBBLE {
+	CIRCLE { s 15 alpha -0.7 }
+	CIRCLE { s 3 x 17 alpha -0.7 }
+
+	BUBBLE { y 15 s 0.5 alpha -0.01 r 15}
+}

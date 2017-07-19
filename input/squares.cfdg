@@ -1,0 +1,22 @@
+startshape grid
+ 
+rule grid {
+32* {y 1} row {} 
+  }
+rule row {
+32* {x 1} core {} 
+  }
+rule core .5  {
+  SQUARE {b -1  hue 80 sat 1  b 0.3 
+ 				|hue 80   |sat 1 |b 1 }
+  CIRCLE {b 1 hue 122 sat 1  b 0.3 
+ 				|hue 122   |sat 1 |b 1  }
+  core {s .95}
+}
+rule core .5 {
+  SQUARE {b 1  }
+  CIRCLE {b  -5    hue 80  sat 1  b 0.3 
+ 				|hue 84  |sat 1 |b 1 }
+  core {s .95 }
+}
+rule core .001 {}

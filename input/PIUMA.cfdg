@@ -1,0 +1,78 @@
+startshape PIUMA
+
+background { b -.8 sat 1  h -10} 
+
+rule PIUMA {
+
+
+
+
+200 * {y .1 s .9975 r -.1}  ELE {s .04}
+
+100 * {y -.1 s .993 r .2}  ELE {s .04}
+
+}
+
+
+
+rule ELE {
+
+EL {x 1.6  r 90 }
+EL {x  -1.6  r 90 flip 180 }
+
+}
+
+
+rule EL{
+
+PEN{}
+EL{s .999 r -.103 x .2}
+}
+
+
+rule EL 0.000251 {
+EL{flip 180}
+}
+
+
+rule EL 0.002 {
+EL2{s .8}
+//EL2{flip 0 s .8}
+}
+
+
+
+
+
+rule EL2{
+PEN{}
+EL2{s .9996 r -.08381 x .2}
+}
+
+rule EL2 0.000251 {
+EL2{flip 180}
+}
+
+
+
+rule PEN 3 {
+PENNA {b 1}
+}
+
+rule PEN{
+//PENNA {b -1 z -10}
+}
+
+
+
+
+rule PENNA{
+
+CIRCLE{a -.99 s 35 b -1 z -2}
+//CIRCLE{a -.998 s 10  z -1}
+CIRCLE{a -.7}
+
+
+
+
+}

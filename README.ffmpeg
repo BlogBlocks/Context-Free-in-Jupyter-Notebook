@@ -1,0 +1,59 @@
+*** Context Free
+*** version 3.0
+
+    by Chris Coyne, John Horigan and Mark Lentczner
+
+    Context Free Copyright 2012 John Horigan
+
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
+DISTRIBUTION & LICENSE
+
+Context Free is released under the GNU license.  
+
+Context Free is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or (at your
+option) any later version.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+59 Temple Place, Suite 330, Boston, MA  02111-1307  USA.
+
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
+
+The Windows and Linux builds of Context Free/cfdg use FFmpeg 3.3.1 to generate 
+Quicktime animation output. Earlier or later versions of ffmpeg may not work
+as the FFmpeg API is a moving target. Libav does not work, only FFmpeg.
+
+The source distribution does not contain FFmpeg libraries. The Windows build
+dynamically detects the presence of FFmpeg DLLs and enables QuickTime support
+if they are found. An installer for the DLLs and ffplay.exe is at
+https://www.contextfreeart.org/download/CF_FFmpegInstall3.3.1.exe
+
+Linux variants:
+1) FFmpeg is required, not the libav replacement the Debian has switched to.
+   Ubuntu is not up to FFmpeg 3.3.1 yet, but the 3.0.7+ versions in Ubuntu
+   16.10 and later should work. You may need to build and install FFmpeg.
+
+2) FFmpeg must have libx264 and prores_ks support. If you are building
+   FFmpeg then you will need libx264-dev. When building FFmpeg you must
+   include these options in the configuration:
+     ./configure  --enable-libx264 --enable-gpl
+
+3) src-ffmpeg/include contains the header files for FFmpeg 3.3.1. If you are 
+   building against a different version of FFmpeg then replace src-ffmpeg/include
+   with a symlink to that versions include files. If they are installed in 
+   a system include directory then just delete the contents of src-ffmpeg/include
+
+4) Modify the Makefile to enable FFmpeg support:
+* Uncomment out COMMON_SRCS += ffCanvas.cpp
+* Uncomment out LIBS += avformat avcodec swscale swresample avutil z m x264 pthread dl
+* Comment out COMMON_SRCS += ffCanvasDummy.cpp
+
+5) make clean && make
+

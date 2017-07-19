@@ -1,0 +1,434 @@
+/*********************
+ * Context Free Kiss *
+ * By Scott Pakin    *
+ *********************/
+
+startshape composite
+
+width = 800
+height = 800
+
+CF::Background = [ h 80 sat 0.45 b -0.7 ]
+CF::Size = [ s width height x (-width/2) y (-height/2) ]
+
+shape one_square_splotch {
+  loop 5 [ ]
+    SQUARE [ h (30 +- 5) sat (0.75 +- 0.05) b (0.75 +- 0.05)
+             r -8..8 a -0.8
+             s 0.9..1.0 ]
+}
+
+shape speckle_walk
+rule 99% {
+  SQUARE [ h (-2 .. 2) sat (-0.05 .. 0.05) b (0 .. 0.05) s 1..2 ]
+  speckle_walk [ x (2*(-1..1)) y (2*(-1..1)) ]
+}
+rule 1% {}
+
+shape square_splotches {
+  max_edge = 50
+  loop max_edge, height - max_edge [ y 1 ]
+    loop max_edge, width - max_edge [ x 1 ]
+      if (rand() < 0.0001)
+        one_square_splotch [ x max_edge y max_edge s rand(max_edge/2, max_edge) rand(max_edge/2, max_edge) ]
+}
+
+shape speckles {
+  loop height [ y 1 ]
+    loop width [ x 1 ]
+      if (rand() < 0.3)
+        SQUARE [ h (37 +- 3) sat (0.70 .. 0.75) b (0.80 .. 0.90) s 1 z 30 ]
+      else if (rand() < 0.005)
+        speckle_walk [ h 35 sat 0.75 b 0.75 z 10 ]
+      else if (rand() < 0.0003)
+        speckle_walk [ h 80 sat 0.45 b 0.3 z 10 ]
+      else if (rand() < 0.0001)
+        CIRCLE [ h 47 sat 0.6 b 1 s 5..10 z 20 ]
+}
+
+shape bg_pattern {
+  square_splotches [ ]
+  speckles [ ]
+}
+
+shape grass_blade
+rule 300 {
+  CIRCLE [ s 2 ]
+  grass_blade [ x -1..1 y -1 ]
+}
+rule 1 {}
+
+shape grass {
+  loop 2400 [ x 0.25 y (25/600) ]
+    grass_blade [ y (200 .. 210) h (140 .. 150) sat (0.85 .. 1.0) b (0.3 .. 0.5) ]
+}
+
+path soft_triangle {
+  MOVETO(0.001953, -0.246484)
+  CURVETO(-0.237891, 0.169141, -0.478125, -0.246484, -0.478125, -0.246484)
+  CURVETO(0.242188, 0.169141, 0.001953, 0.585156, 0.001953, 0.585156)
+  CURVETO(0.001953, -0.246484, 0.482031, -0.246484, 0.482031, -0.246484)
+  CLOSEPOLY()
+  FILL [ ]
+}
+
+shape flower(adjustment petal_color) {
+  loop 6 [ r 60 ]
+    soft_triangle [ y 0.5 transform petal_color h -5..5 ]
+  CIRCLE [ s 0.75 h 40 sat 1 b 0.8 z 1 ]
+  CIRCLE [ s 0.25 h 0..360 sat 1 b 0..0.2 z 2 ]
+}
+
+shape red_tulip {
+  tWidth = 15 .. 25
+  loop tWidth-5 [ x 0.1 ] {
+    CIRCLE [ h 80..115 sat 0.5..0.65 b 0.4..0.7 s 1 4 a -0.5 x 0.25 y -0.9..-0.8 z 0..1 ]
+  }
+  loop tWidth [ x 0.1 ]
+    CIRCLE [ h 340..360 sat 0.55..0.65 b 0.35..0.55 s 1 4 a -0.5 y -0.1..0.1 z 1..2 ]
+}
+
+shape red_flower {
+  loop 5 [ s 0.9 r 2 x -0.01..0.01 y -0.01..0.01 ]
+    flower([h 5 sat 0.5 b 0.5]) [ a -0.1 ]
+}
+
+shape yellow_flower {
+  loop 5 [ s 0.9 r 2 x -0.01..0.01 y -0.01..0.01 ]
+    flower([h 40 sat 0.9 b 0.7]) [ a -0.1 ]
+}
+
+shape blue_flower {
+  bness = 0.3 .. 0.55
+  loop 5 [ s 0.9 r 2 x -0.01..0.01 y -0.01..0.01 ]
+    flower([h 190 sat 0.7 b bness]) [ a -0.1 ]
+}
+
+shape beige_flower {
+  loop 5 [ s 0.9 r 2 x -0.01..0.01 y -0.01..0.01 ]
+    loop 6 [ r 60 ]
+      soft_triangle [[ y 0.5 h 40 sat 0.32 b 0.55 h -5..5 ]]
+}
+
+shape flower_bed {
+  loop across=600 [ x 1 ]
+    loop across/6 + 200 [ y 1 ] {
+      rOfs = rand(360)
+      hOfs = -10 .. 10
+      satOfs = rand(0.1)
+      bOfs = rand(0.1)
+      switch (randint(600)) {
+        case 0:
+          blue_flower [ s 10 skew 1 5 r rOfs h hOfs sat satOfs b bOfs z 10 ]
+        case 1:
+          yellow_flower [ s 8 skew 1 5 r rOfs h hOfs sat satOfs b bOfs z 20 ]
+        case 2:
+          if (randint(4) == 0)
+            red_tulip [ s 5 r -rand(30) h hOfs sat satOfs b bOfs z 30 ]
+        case 3:
+          if (randint(4) == 0)
+            red_flower [ s 15 skew 1 5 r rOfs h hOfs sat satOfs b bOfs z 40 ]
+      }
+    }
+}
+
+path robes_outline {
+  MOVETO(-151.6, 179.7)
+  CURVETO(-183.1, 113.1, -184.6, 159.9, -189.4, 158.6)
+  CURVETO(-187.4, -80.0, -176.7, 67.5, -199.4, -24.9)
+  CURVETO(-179.7, -196.3, -175.5, -135.2, -184.4, -157.3)
+  CURVETO(-149.9, -296.4, -175.0, -234.8, -171.7, -270.3)
+  CURVETO(-43.1, -327.7, -128.0, -322.6, -82.1, -329.5)
+  CURVETO(53.3, -276.3, -4.1, -326.0, 27.9, -293.4)
+  CURVETO(110.2, -227.0, 78.8, -259.1, 98.7, -258.4)
+  CURVETO(100.8, -115.9, 121.7, -195.6, 110.4, -156.6)
+  CURVETO(61.2, 18.2, 91.2, -75.3, 83.0, -20.9)
+  CURVETO(58.3, 135.6, 39.5, 57.3, 81.5, 97.9)
+  CURVETO(-23.3, 191.8, 35.1, 173.2, 17.3, 194.1)
+  CURVETO(-151.6, 179.7, -63.9, 189.5, -118.6, 199.5)
+  CLOSEPOLY()
+  FILL() [ ]
+}
+
+shape robe_background {
+  robes_outline [ ]
+  speed = 0.125
+  robe_background [ x -1 s 0.99 h speed 43 sat speed 0.75 b speed 0.93 z 0.001 ]
+}
+
+shape swirl {
+  CIRCLE [ ]
+  swirl [ s 0.999 r 1 x 0.1 h -0.1..0.1 ]
+}
+
+shape robe_swirls {
+  loop row=12 [ y 40 ]
+    loop col=3 [ x 40 ]
+      if (rand() < 0.8 && !(col == 0 && (row == 0 || row == 11)))
+        swirl [ s 2.5..5 ]
+}
+
+shape rings {
+  rinc = 4
+  loop xinc=1, 14..19, 4 [ ]
+    loop 360*1.25*rinc [ r (1/rinc) x (-0.03..0.03) h -0.1..0.1 ]
+      CIRCLE [ x xinc h 40 sat 0.8 b 0.85 ]
+  if (randint(2) == 0)
+    loop xinc=1, 6..7 [ ]
+      loop 360*rinc [ r (1/rinc) x (-0.03..0.03) h -0.2..0.2 ]
+        CIRCLE [ x xinc h 37 sat 0.4 b 0.8 ]
+  redness = rand(1)
+  loop xinc=1, 2..3 [ ]
+    loop 360*rinc [ r (1/rinc) x (-0.03..0.03) h -0.2..0.2 b -0.01..0.01 ]
+      CIRCLE [ x xinc h 15 sat redness b 0.75 ]
+}
+
+shape robe_rings {
+  loop row=9 [ x -10..5 y 55 ]
+    loop col=4 [ x 35 y 35 ]
+      if (col == 0 || (col == 1 && row < 8) || (col == 2 && row < 7) || (col == 3 && row < 2))
+        rings [ s 1.5 ]
+}
+
+shape splotchy_square {
+  res = 10
+  loop res [ y (1/res) ]
+    loop res [ x (1/res) ]
+      SQUARE [ s (1/res) b -0.2..0.2 ]
+}
+
+shape robe_square {
+  splotchy_square [ h 125 sat 0.95 b 0.01 ]
+  switch (randint(8)) {
+    case 0: {}
+    case 1: splotchy_square [ h 32 sat 0.5 b 0.8 ]
+    case 2: splotchy_square [ h 32 sat 0.5 b 0.8 s 0.9 x 0.05 y 0.05 ]
+    else  : splotchy_square [ h 46 sat 0.7 b 1 s 0.9 x 0.05 y 0.05 ]
+  }
+}
+
+shape robe_rectangle_row(natural remaining, number ht) {
+  if (remaining > 0) {
+    if (randint(2) == 0)
+      robe_square [ s 10 ht ]
+    robe_rectangle_row(remaining--1, ht) [ x 10 r -2..2 ]
+  }
+}
+
+shape robe_rectangle_grid(natural rows_remaining, natural cols_remaining) {
+  if (rows_remaining > 0) {
+    ht = 20 .. 50
+    robe_rectangle_row(cols_remaining, ht) [ ]
+    robe_rectangle_grid(rows_remaining--1, cols_remaining) [ y ht ]
+  }
+}
+
+shape robe_rectangles {
+  robe_rectangle_grid(1, 7) [ x 350 y 250 ]
+  robe_rectangle_grid(1, 11) [ x 310 y 280 ]
+  robe_rectangle_grid(10, 12) [ x 300 y 310 ]
+  loop 3 [ ]
+    splotchy_square [ x 300..400 y 300..650 z 10 s 20..30 60..75 h 125 sat 0.95 b 0.01 ]
+}
+
+shape robes {
+  robe_background [ x 475 y 550 h 35 sat 0.7 b 0.8 ]
+  robe_swirls [ x 325 y 240 z 10 h 45 sat 0.8 b 0.95 ]
+  robe_rings [ x 450 y 250 z 20 ]
+  robe_rectangles [ z 30 ]
+}
+
+shape hair {
+  loop rad=0, 40 [ ]
+    loop ang=0, 360, 4 [ ] {
+      xpos = rad*cos(ang)*1.25
+      ypos = rad*sin(ang)
+      CIRCLE [ s 2..6 x xpos y ypos z rand() h -5..5 sat -0.1..0.1 b -0.1..0.1 ]
+    }
+}
+
+shape leaf {
+  style =  [ h 140..150 sat 0.85..1.0 b 0.3..0.6 ]
+  loop 2 [ x 0.25 ]
+    soft_triangle [ r rand(360) trans style ]
+}
+
+shape woman_hair_flowers {
+  loop rad=0, 36 [ ]
+    loop ang=0, 360 [ ] {
+      xpos = rad*cos(ang)*1.25
+      ypos = rad*sin(ang)
+      switch (randint(1000)) {
+        case 0: beige_flower [ x xpos y ypos s 8 ]
+        case 1: blue_flower [ x xpos y ypos s 8 ]
+        case 2: leaf [ x xpos y ypos s 16 ]
+      }
+   }
+}
+
+path face {
+  MOVETO(5.3, -28.6)
+  CURVETO(37.7, -15.4, 22.3, -28.7, 37.3, -21.7)
+  CURVETO(40.7, 0.7, 38.1, -9.1, 40.3, -4.3)
+  CURVETO(45.3, 20.2, 41.1, 5.7, 46.1, 13.9)
+  CURVETO(35.4, 31.2, 44.4, 26.4, 45.7, 28.6)
+  CURVETO(-37.2, 8.2, 23.0, 34.3, -5.6, 34.2)
+  CURVETO(-40.9, -4.1, -41.9, 4.2, -41.1, 3.2)
+  CURVETO(5.3, -28.6, -40.8, -11.5, -11.7, -28.4)
+  CLOSEPOLY()
+  FILL() [ h 40 sat 0.35 b 0.75 ]
+}
+
+path eyebrow {
+  MOVETO(29.4, 23.2)
+  CURVETO(25.6, 13.0, 29.4, 18.4, 27.7, 15.6)
+  CURVETO(24.3, 14.2, 23.4, 10.4, 24.3, 14.2)
+  CURVETO(25.6, 21.7, 24.3, 14.2, 25.8, 18.7)
+  CURVETO(25.7, 29.7, 25.3, 24.7, 23.7, 29.3)
+  CURVETO(29.4, 23.2, 27.7, 30.2, 29.1, 27.0)
+  CLOSEPOLY()
+  FILL() [ h 55 sat 0.45 b 0.45 ]
+  STROKE(1) [ ]
+}
+
+path eyelid {
+  MOVETO(10.7, 22.4)
+  CURVETO(15.1, 11.3, 10.8, 18.7, 13.7, 12.9)
+  CURVETO(15.8, 13.4, 16.6, 9.7, 15.8, 13.4)
+  CURVETO(13.7, 20.6, 15.8, 13.4, 13.1, 17.6)
+  CURVETO(14.7, 26.4, 14.3, 23.6, 15.0, 25.4)
+  CURVETO(10.7, 22.4, 14.3, 27.8, 10.7, 24.3)
+  CLOSEPOLY()
+  FILL() [ h 100 sat 0.45 b 0.3 ]
+  STROKE(1) [ ]
+}
+
+path nose {
+  MOVETO(23.6, 11.7)
+  CURVETO(7.6, 7.9, 17.8, 8.4, 11.7, 8.3)
+  CURVETO(-2.2, 11.6, 3.4, 7.4, 0.1, 11.7)
+  CURVETO(-5.0, 3.6, -4.4, 11.4, -5.0, 5.2)
+  CURVETO(-3.3, -4.3, -5.0, 2.0, -4.0, -4.0)
+  CURVETO(8.3, 2.2, -0.3, -5.5, 2.7, 2.0)
+  CURVETO(26.0, -3.6, 13.7, 2.3, 21.0, 1.9)
+  STROKE(1) [ h 115 sat 0.15 b 0.4 ]
+}
+
+path mouth {
+  MOVETO(-21.6, 2.2)
+  CURVETO(-16.7, -8.6, -21.6, -2.7, -17.7, -8.6)
+  CURVETO(-13.2, 1.9, -15.7, -8.6, -13.2, -2.3)
+  CURVETO(-16.3, 11.9, -13.2, 6.0, -14.9, 12.0)
+  CURVETO(-21.6, 2.2, -17.7, 11.7, -21.2, 8.9)
+  CLOSEPOLY()
+  FILL() [ h 22 sat 0.6 b 0.7 ]
+  STROKE(1) [ ]
+}
+
+shape woman_complete_face {
+  face [ ]
+  eyebrow [ ]
+  eyelid [ ]
+  eyebrow [ flip 0 x 2 y 8 ]
+  eyelid [ flip 0 x 2 y 7 ]
+  nose [ ]
+  CIRCLE [ x -4 y 7 s 2 4 r -10 h 120 sat 0.25 b 0.4 ]
+  CIRCLE [ x -4 s 2 4 r 10 h 120 sat 0.25 b 0.4 ]
+  mouth [ ]
+}
+
+path leg {
+  MOVETO(79.8, -118.3)
+  CURVETO(129.2, -116.4, 91.0, -119.9, 115.6, -118.2)
+  CURVETO(181.2, -100.2, 161.7, -112.2, 172.8, -100.1)
+  CURVETO(193.2, -127.1, 189.6, -100.3, 193.2, -114.1)
+  CURVETO(200.7, -150.8, 193.2, -134.9, 199.9, -139.3)
+  CURVETO(182.9, -169.1, 200.9, -154.4, 188.9, -168.8)
+  CURVETO(179.1, -165.9, 179.1, -169.3, 181.0, -167.0)
+  CURVETO(174.0, -166.3, 177.5, -165.1, 176.0, -168.2)
+  CURVETO(183.6, -154.3, 172.9, -165.3, 179.1, -157.3)
+  CURVETO(174.8, -141.7, 187.6, -151.7, 181.3, -148.1)
+  CURVETO(147.4, -131.8, 166.7, -133.7, 163.4, -132.5)
+  CURVETO(82.6, -153.5, 128.5, -131.0, 121.9, -144.9)
+  FILL() [ h 35 sat 0.37 b 0.73 ]
+  STROKE(1) [ h 66 sat 0.3 b 0.4 ]
+}
+
+shape woman {
+  hair [ x 490 y 660 r 90 h 30 sat 0.75 b 0.5 ]
+  woman_hair_flowers [ x 490 y 660 r 90 z 10 ]
+  woman_complete_face [ x 460 y 655 z 20 ]
+  leg [ x 425 y 450 z 30 ]
+}
+
+path man_shoulders {
+  MOVETO(-76.7, 6.9)
+  CURVETO(-71.6, 13.0, -76.4, 11.3, -75.8, 12.3)
+  CURVETO(-55.3, 20.1, -67.4, 13.7, -58.6, 18.7)
+  CURVETO(-41.2, 27.7, -52.1, 21.5, -44.9, 25.9)
+  CURVETO(-22.2, 32.8, -37.5, 29.6, -26.2, 32.5)
+  CURVETO(30.9, 38.6, -18.3, 33.1, 13.5, 40.2)
+  CURVETO(76.0, 5.7, 48.3, 37.1, 77.1, 36.3)
+  CURVETO(67.8, -19.2, 75.3, -14.4, 70.2, -16.7)
+  CURVETO(64.4, -28.6, 65.4, -21.8, 66.1, -27.3)
+  CURVETO(55.2, -29.1, 62.7, -29.8, 57.5, -28.0)
+  CURVETO(33.9, -38.6, 50.4, -31.5, 39.7, -36.9)
+  CURVETO(7.2, -28.8, 30.6, -39.6, 15.3, -33.1)
+  CURVETO(-11.6, -29.1, 0.7, -25.4, -3.4, -29.4)
+  CURVETO(-34.8, -23.3, -23.0, -28.7, -23.7, -23.9)
+  CURVETO(-53.6, -21.5, -41.0, -23.0, -48.0, -25.0)
+  CURVETO(-76.7, 6.9, -59.3, -18.0, -74.9, -8.9)
+  CLOSEPOLY()
+  FILL() [ h 35 sat 0.37 b 0.73 ]
+  STROKE(1) [ h 66 sat 0.3 b 0.4 ]
+}
+
+shape man_hair_flowers {
+  loop ang=0, 360 [ ] {
+    rad = 25 .. 35
+    xpos = rad*cos(ang)*1.25
+    ypos = rad*sin(ang)
+    if (randint(40) == 0)
+      leaf [ x xpos y ypos s 12 ]
+  }
+}
+
+shape man {
+  man_shoulders [ x 400 y 705 ]
+  hair [ x 430 y 710 s 1 0.9 h 140 sat 0.7 b 0.25 z 10 ]
+  man_hair_flowers [ x 430 y 710 z 20 ]
+}
+
+shape thread_segment {
+  soft_triangle [ x -0.5 r 180 ]
+  SQUARE [ s 0.2 1 ]
+  soft_triangle [ x 0.5 r 180 ]
+}
+
+shape complete_thread(number angle) {
+  thread_segment [ ]
+  if (randint(50) <> 0) {
+    color_adj = [ h -1..1 sat -0.05..0.05 b -0.05..0.05 ]
+    if (rand() < 0.2)
+      complete_thread(-10..10) [ r angle y -1 trans color_adj ]
+    else
+      complete_thread(=) [ r angle y -1 trans color_adj ]
+  }
+}
+
+shape threads(natural remaining) {
+  if (remaining > 0) {
+    complete_thread(0) [ s 15 ]
+    threads(remaining--1) [ x 20..25 y 10..30 ]
+  }
+}
+
+shape composite {
+  bg_pattern [ ]
+  grass [ z 100 ]
+  flower_bed [ z 200 ]
+  robes [ z 300 ]
+  woman [ z 400 ]
+  man [ z 500 ]
+  threads(8) [ h 40 sat 0.8 b 1 x 400 y 220 z 600 ]
+}
