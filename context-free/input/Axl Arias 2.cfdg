@@ -1,0 +1,20 @@
+background {b -1}
+startshape lol2
+rule lol2
+{
+12*{r 30} lol{}
+}
+rule r1{
+CIRCLE{h 23 sat 1 b 1 s.9}
+lol{s.99 y .9 h -10..10 sat 1 b 1 r 2}}
+rule r1{
+CIRCLE{h 21 sat 1 b 1 }
+lol{s.96 y .9 h -10..10 sat 1 b 1 r -2 }}
+
+rule lol
+{
+r1{}
+lol{r 45 s .3 y 2}
+lol{r -45 s.3 y 2}
+
+}

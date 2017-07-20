@@ -1,0 +1,7 @@
+    S -> NP VP
+    NP -> Det N
+    PP -> P NP
+    VP -> 'slept' | 'observed' NP | 'walked' | 'ran' | 'jumped' | 'played' | 'spoke with' PP
+    Det -> 'some' | 'several' | 'many' | ' a few' | 'a crowd of'  
+    N -> 'men' | 'women' | 'dogs' |'birds' | 'cats' | 'girls' | 'boys' | 'old men' | 'old women'
+    P -> 'over' | 'with' | 'around' | 'next to' | 'behind' | 'in front of'

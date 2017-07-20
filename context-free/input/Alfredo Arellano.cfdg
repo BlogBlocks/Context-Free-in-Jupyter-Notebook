@@ -1,0 +1,9 @@
+startshape KKK
+CF::Symmetry = CF::Dihedral, 18
+CF::Background = [b-1]
+
+shape KKK
+{
+TRIANGLE[h 14 sat .8 b .5 a -.8 r 12]
+KKK[s.98 r 14 y .2 h 14 sat .8 b .5]
+}
