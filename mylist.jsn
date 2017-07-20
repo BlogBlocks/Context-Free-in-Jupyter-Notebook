@@ -1,0 +1,16 @@
+[row = cursor.fetchone()
+while row:
+    #print(row)
+    rowstring = "" # printed for each row
+    result = row[b64field_idx] # set to base64 field value
+    
+    for j in range(numcols):
+        rowstring += str(row[j]) + "\t" # Need to print each column (tab separated)
+         
+    try:
+        # Now we can Base64 decode however many times they want
+        for j in range(args.b64count) :
+            temp = base64.decodestring(result)
+            result = temp
+        rowstring += result # Add the decoded result to the output string
+        ]
