@@ -1,20 +1,21 @@
-startshape THORNS2
+startshape HORN
+background { b -0.1; h 220; sat 0.7 }
 
 rule THORN {
 	CIRCLE {}
-	THORN { s 0.95 y 0.3 }
+	THORN {h -20  s 0.95 y 0.3 }
 }
 
 rule THORNS {
 	THORN {}
-	THORNS {s 0.5 r -85 y 6.2 }
-	THORNS {s 0.5 r 85 y 6.2 }
-	THORNS {s 0.5 y 6.2 }
+	THORNS {h 2.49 sat 0.5116 s 25 r -85 y 6.2 }
+	THORNS {h 2.49 sat 0.5116 s 25 r 85 y 6.2 }
+	THORNS {h 2.49 sat 0.5116 s 25 y 6.2 }
 }
 
-rule THORNS2 {
-	THORNS {r 45}
-	THORNS {r 135}
-	THORNS {r 225}
-	THORNS {r 315}
+rule HORN {
+	THORNS {r 25}
+	THORNS {r 35}
+	THORNS {r 25}
+	THORNS {r 15}
 }

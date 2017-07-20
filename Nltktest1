@@ -1,0 +1,11 @@
+    S -> NP VP | A |B | C
+    NP -> Det N
+    A -> 'i think i saw' Det N R
+    B -> 'i want to see' Det N R
+    C -> 'did you see' Det N R
+    PP -> P NP
+    VP -> 'slept' | 'observed' NP | 'walked' | 'ran' | 'jumped' | 'spoke with' PP
+    Det -> 'the' | 'a'
+    N -> 'man' | 'woman' | 'dog' |'bird' | 'cat' | 'girl' | 'boy'
+    P -> 'over' | 'with' | 'around' | 'next to' | 'behind' | 'in front of'
+    R -> 'running' | 'hidding' | 'fighting' | 'playing'

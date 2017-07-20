@@ -1,0 +1,8 @@
+    S -> E NP VP
+    E -> 'Guess What ?' | 'Did you know?' | 'I saw' | 'Did you see?' | 'Yesterday' 
+    NP -> Det N
+    PP -> P NP
+    VP -> 'slept' | 'observed' NP | 'walked' | 'ran' | 'jumped' | 'spoke with' PP
+    Det -> 'the' | 'a'
+    N -> 'man' | 'woman' | 'dog' |'bird' | 'cat' | 'girl' | 'boy'
+    P -> 'over' | 'with' | 'around' | 'next to' | 'behind' | 'in front of'

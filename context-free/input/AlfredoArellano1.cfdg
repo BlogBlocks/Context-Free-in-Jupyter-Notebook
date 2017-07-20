@@ -1,0 +1,10 @@
+startshape CIRCLE
+background{b -1}
+
+tile {s 2 1}
+rule star{
+CIRCLE{}
+ 
+    star{s 1.5}
+}
+ 

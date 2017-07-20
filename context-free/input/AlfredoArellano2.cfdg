@@ -1,0 +1,9 @@
+startshape picture
+background{b -1}
+ 
+tile{s 3 y -.6 x -1.9}
+rule picture{
+    glow{h 2.49 sat 0.5116 }
+    glow{h 225.00 sat 0.0157}
+ 
+}
